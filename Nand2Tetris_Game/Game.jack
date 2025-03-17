@@ -1,0 +1,59 @@
+class Game{
+    field GameFiled gameFiled;
+
+    constructor Game new(GameFiled gameF){
+        let gameFiled = gameF;
+        return this;
+    }
+
+    /* Базовый метод работы игры 
+        Q - сменить игровой режим на 3 на 3
+        W - сменить игровой режим на 4 на 4
+        E - сменить игровой режим на 5 на 5
+        R - выйти из игры (пока только стиарет поле, но из игры не выходит)
+        */
+	method void run() {
+		var char key; // the key currently pressed by the user
+        var int size;
+        var bool exit;
+
+        let exit = false;
+		while (~exit) {
+			// typical handling of "keyboard events" in interactive Jack apps
+			// waits for a key to be pressed
+			while (key = 0) {
+				let key = Keyboard.keyPressed(); 
+                let size = gameFiled.getSize();
+
+				if ((key = 81) & (~(size = 3))) {
+                    do Screen.clearScreen();
+                    do gameFiled.dispose();
+                    let gameFiled = GameFiled.new(0,3); // press q
+				} 
+				if ((key = 87) & (~(size = 4))) { 
+                    do Screen.clearScreen();
+                    do gameFiled.dispose();
+                    let gameFiled = GameFiled.new(0,4); // press w
+				} 
+				if ((key = 69) & (~(size = 5))) { 
+ 
+                    do Screen.clearScreen();
+                    do gameFiled.dispose();
+                    let gameFiled = GameFiled.new(0,5); // press e
+				}
+                if ((key = 82)) { 
+                    do Screen.clearScreen();
+                    do gameFiled.dispose();
+                    let exit = true; // press r
+				}  
+				
+				// waits for the key to be released
+				while (~(key = 0)) {
+					let key = Keyboard.keyPressed(); 
+
+				}
+			} 
+            return;
+        }
+    }
+}

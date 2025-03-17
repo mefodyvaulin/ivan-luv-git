@@ -1,8 +1,12 @@
 class Main 
 {
-    function void main() 
-    {
-        do Output.printString("Hello, world!");
+    function void main() {
+        var GameFiled gameFiled;
+        var Game game;
+
+        let gameFiled = GameFiled.new(0, 3);
+        let game = Game.new(gameFiled);
+        do game.run();
         return;
     }
 }

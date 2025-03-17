@@ -1,0 +1,118 @@
+function GameFiled.new 0
+push constant 6
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+call Tiel.new 0
+pop this 2
+call Tiel.new 0
+pop this 3
+call Tiel.new 0
+pop this 4
+call Tiel.new 0
+pop this 5
+push argument 1
+call GameFiled.draw 1
+pop temp 0
+call Output.backSpace 0
+pop temp 0
+push this 0
+call Output.printInt 1
+pop temp 0
+push pointer 0
+return
+function GameFiled.getSize 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function GameFiled.dispose 0
+push argument 0
+pop pointer 0
+push this 2
+call Tiel.dispose 1
+pop temp 0
+push this 3
+call Tiel.dispose 1
+pop temp 0
+push this 4
+call Tiel.dispose 1
+pop temp 0
+push this 5
+call Tiel.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function GameFiled.draw 3
+push constant 240
+push argument 0
+call Math.divide 2
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push argument 0
+push constant 1
+add
+lt
+not
+if-goto WHILE_END0
+push constant 136
+push local 1
+push local 0
+call Math.multiply 2
+add
+push constant 8
+push constant 136
+push local 1
+push local 0
+call Math.multiply 2
+add
+push constant 248
+call Screen.drawLine 4
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+pop local 2
+label WHILE_EXP1
+push local 2
+push argument 0
+push constant 1
+add
+lt
+not
+if-goto WHILE_END1
+push constant 136
+push constant 8
+push local 2
+push local 0
+call Math.multiply 2
+add
+push constant 376
+push constant 8
+push local 2
+push local 0
+call Math.multiply 2
+add
+call Screen.drawLine 4
+pop temp 0
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP1
+label WHILE_END1
+push constant 0
+return

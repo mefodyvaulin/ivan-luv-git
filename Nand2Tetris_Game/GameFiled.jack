@@ -1,0 +1,59 @@
+class GameFiled 
+{
+    field int score, gridSize; // счетчик, размер сетки
+	field Tiel tiels1, tiels2, tiels3, tiels4; // плитки на поле
+
+	constructor GameFiled new(int count, int size) {
+		let score = count;
+		let gridSize = size;
+		let tiels1 = Tiel.new();
+		let tiels2 = Tiel.new();
+		let tiels3 = Tiel.new();
+		let tiels4 = Tiel.new();
+		do GameFiled.draw(size);
+		do Output.backSpace();
+		do Output.printInt(score);
+		
+		return this;
+	}
+
+	method int getSize() {
+        return gridSize; // Доступ к полю вне класса
+    }
+
+	method void dispose() {
+		do tiels1.dispose();
+		do tiels2.dispose();
+		do tiels3.dispose();
+		do tiels4.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	/*Рисует игровую сетку */
+	function void draw(int gridSiz) {
+		var int tileSize;
+		var int i;
+		var int j;
+
+		let tileSize = 240 / gridSiz; // Размер плитки в зависимости от количества плиток
+
+
+		// Вертикальные линии
+		let i = 0;
+		while (i < (gridSiz + 1)) {
+			do Screen.drawLine(136 + (i * tileSize), 8, 136 + (i * tileSize), 248); 
+			let i = i + 1;
+		}
+
+		// Горизонтальные линии
+		let j = 0;
+		while (j < (gridSiz + 1)) {
+			do Screen.drawLine(136, 8 + (j * tileSize), 376, 8 + (j * tileSize)); 
+			let j = j + 1;
+		}
+
+		return;
+	}
+
+}

@@ -1,0 +1,16 @@
+/*Плитки с значениями на поле*/
+class Tiel{
+    
+    field int num;
+
+    constructor Tiel new() {
+        // инициализирует поля
+		return this;
+	}
+
+    method void dispose() {
+        // удаляет поля и сам объект из памяти
+		return;
+	}
+
+}
