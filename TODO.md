@@ -1,4 +1,4 @@
-- Сгенерировать код для ячеек по картинкам из Assert с помощью [сайта](https://happytomatoe.github.io/jack-image-converter/) и вставит в класс DrawNum.jack, поменяв method на function и сменив название по аналогии с уже существующими function
+- Сгенерировать код для ячеек по картинкам из Assert с помощью [сайта](https://happytomatoe.github.io/jack-image-converter/) и вставит в класс DrawerNum.jack, поменяв method на function и сменив название по аналогии с уже существующими function
 - Реализовать движение ячеек и их отрисовку
 - Починить выход из игры
 - Подсчет очков
