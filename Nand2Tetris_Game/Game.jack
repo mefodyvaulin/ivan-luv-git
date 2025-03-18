@@ -41,7 +41,7 @@ class Game{
                     do gameFiled.dispose();
                     let gameFiled = GameFiled.new(0,5); // press e
 				}
-                if ((key = 82)) { 
+                if ((key = 82)& (~(size = 2))) { 
                     do Screen.clearScreen();
                     do gameFiled.dispose();
                     let exit = true; // press r

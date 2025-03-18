@@ -93,6 +93,11 @@ label IF_FALSE2
 push local 0
 push constant 82
 eq
+push local 1
+push constant 2
+eq
+not
+and
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3

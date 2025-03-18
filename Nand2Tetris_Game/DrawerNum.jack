@@ -1,0 +1,74 @@
+class DrawerNum{
+    
+    // рисует ячейку с цифрой 2 для сетки 3 на 3
+    function void drawTwoTri(int x, int y)
+    {
+           do Screen.drawLine(x+2,y,x+67,y);
+        do Screen.drawLine(x+1,y+1,x+3,y+1);
+        do Screen.drawLine(x+66,y+1,x+68,y+1);
+        do Screen.drawRectangle(x,y+2,x+1,y+3);
+        do Screen.drawRectangle(x+68,y+2,x+69,y+3);
+        do Screen.drawLine(x,y+4,x,y+67);
+        do Screen.drawLine(x+69,y+4,x+69,y+67);
+        do Screen.drawRectangle(x+33,y+27,x+36,y+29);
+        do Screen.drawRectangle(x+31,y+28,x+32,y+32);
+        do Screen.drawRectangle(x+37,y+28,x+38,y+35);
+        do Screen.drawLine(x+30,y+29,x+30,y+32);
+        do Screen.drawLine(x+39,y+29,x+39,y+33);
+        do Screen.drawPixel(x+33,y+30);
+        do Screen.drawLine(x+35,y+30,x+36,y+30);
+        do Screen.drawLine(x+36,y+32,x+36,y+37);
+        do Screen.drawLine(x+35,y+34,x+35,y+41);
+        do Screen.drawLine(x+34,y+35,x+34,y+41);
+        do Screen.drawLine(x+33,y+36,x+33,y+41);
+        do Screen.drawPixel(x+37,y+36);
+        do Screen.drawLine(x+32,y+37,x+32,y+41);
+        do Screen.drawLine(x+31,y+38,x+31,y+41);
+        do Screen.drawLine(x+30,y+39,x+30,y+41);
+        do Screen.drawRectangle(x+36,y+39,x+39,y+41);
+        do Screen.drawLine(x+1,y+66,x+1,y+68);
+        do Screen.drawLine(x+68,y+66,x+68,y+68);
+        do Screen.drawRectangle(x+2,y+68,x+3,y+69);
+        do Screen.drawRectangle(x+66,y+68,x+67,y+69);
+        do Screen.drawLine(x+4,y+69,x+65,y+69);
+        return;
+    }
+
+    // рисует ячейку с цифрой 4 для сетки 3 на 3
+    function void drawFoTri (int x, int y){
+         do Screen.drawRectangle(x+7,y,x+62,y+2);
+         do Screen.drawRectangle(x+5,y+1,x+6,y+3);
+        do Screen.drawRectangle(x+63,y+1,x+64,y+3);
+        do Screen.drawRectangle(x+3,y+2,x+4,y+4);
+        do Screen.drawRectangle(x+65,y+2,x+66,y+4);
+        do Screen.drawLine(x+2,y+3,x+2,y+8);
+        do Screen.drawLine(x+67,y+3,x+67,y+8);
+        do Screen.drawLine(x+1,y+4,x+1,y+65);
+        do Screen.drawLine(x+68,y+4,x+68,y+66);
+        do Screen.drawLine(x+3,y+5,x+3,y+6);
+        do Screen.drawLine(x+66,y+5,x+66,y+6);
+        do Screen.drawLine(x,y+6,x,y+64);
+        do Screen.drawLine(x+69,y+6,x+69,y+64);
+        do Screen.drawRectangle(x+35,y+28,x+38,y+33);
+        do Screen.drawLine(x+34,y+29,x+34,y+34);
+        do Screen.drawLine(x+39,y+29,x+39,y+42);
+        do Screen.drawLine(x+33,y+31,x+33,y+36);
+        do Screen.drawLine(x+32,y+32,x+32,y+40);
+        do Screen.drawLine(x+31,y+34,x+31,y+40);
+        do Screen.drawRectangle(x+36,y+34,x+38,y+43);
+        do Screen.drawLine(x+30,y+35,x+30,y+40);
+        do Screen.drawLine(x+29,y+37,x+29,y+40);
+        do Screen.drawRectangle(x+33,y+38,x+35,y+40);
+        do Screen.drawLine(x+40,y+38,x+40,y+40);
+        do Screen.drawLine(x+2,y+62,x+2,y+67);
+        do Screen.drawLine(x+67,y+62,x+67,y+67);
+        do Screen.drawLine(x+3,y+64,x+3,y+68);
+        do Screen.drawLine(x+66,y+64,x+66,y+68);
+        do Screen.drawLine(x+4,y+66,x+4,y+68);
+        do Screen.drawLine(x+65,y+66,x+65,y+68);
+        do Screen.drawRectangle(x+5,y+67,x+6,y+69);
+        do Screen.drawRectangle(x+63,y+67,x+64,y+69);
+        do Screen.drawRectangle(x+7,y+68,x+62,y+70);
+        return;
+    }
+}

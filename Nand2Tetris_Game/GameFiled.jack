@@ -1,19 +1,37 @@
 class GameFiled 
 {
     field int score, gridSize; // счетчик, размер сетки
-	field Tiel tiels1, tiels2, tiels3, tiels4; // плитки на поле
+	field Array tiels; // двумерный массив
 
 	constructor GameFiled new(int count, int size) {
+		var int i, j;
+		var Array tempArr;
 		let score = count;
 		let gridSize = size;
-		let tiels1 = Tiel.new();
-		let tiels2 = Tiel.new();
-		let tiels3 = Tiel.new();
-		let tiels4 = Tiel.new();
-		do GameFiled.draw(size);
-		do Output.backSpace();
-		do Output.printInt(score);
+
+		//инициализируется двумерный массив соответствующий игровому полю
+		let tiels = Array.new(size);
+		let i = 0;
+		let j = 0;
+		while (i < size){
+			let tiels[i] = Array.new(size);
+			while (j < size){
+				let tempArr = tiels[i];
+				let tempArr[j] = 0;
+				let j = j + 1;
+			}
+			let j = 0;
+			let i = i + 1;
+		}
 		
+		// рисуется игрове поле
+		do GameFiled.draw(size);
+		
+		// выводится счет
+		do Output.moveCursor(1, 1);
+		do Output.printString("Score:");
+		do Output.printInt(score);
+
 		return this;
 	}
 
@@ -22,10 +40,6 @@ class GameFiled
     }
 
 	method void dispose() {
-		do tiels1.dispose();
-		do tiels2.dispose();
-		do tiels3.dispose();
-		do tiels4.dispose();
 		do Memory.deAlloc(this);
 		return;
 	}
@@ -53,6 +67,9 @@ class GameFiled
 			let j = j + 1;
 		}
 
+		//врменные строки для проверки вывода ячеек
+		do DrawerNum.drawTwoTri((136+5), (8+5));
+		do DrawerNum.drawTwoTri((136 + 5), (8 + tileSize +5));
 		return;
 	}
 
