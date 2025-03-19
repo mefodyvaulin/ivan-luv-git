@@ -755,30 +755,26 @@ class DrawerNum{
 
     function void draw4Fo(int x, int y) 
     {
-        do Screen.drawRectangle(x+2,y,x+47,y+3);
-        do Screen.drawLine(x+1,y+1,x+1,y+48);
-        do Screen.drawLine(x+48,y+1,x+48,y+48);
-        do Screen.drawLine(x,y+2,x,y+47);
-        do Screen.drawLine(x+49,y+2,x+49,y+47);
-        do Screen.drawLine(x+2,y+4,x+4,y+4);
-        do Screen.drawLine(x+45,y+4,x+47,y+4);
-        do Screen.drawRectangle(x+2,y+5,x+3,y+49);
-        do Screen.drawRectangle(x+46,y+5,x+47,y+49);
-        do Screen.drawLine(x+24,y+19,x+24,y+21);
-        do Screen.drawRectangle(x+22,y+20,x+23,y+23);
-        do Screen.drawRectangle(x+25,y+20,x+27,y+21);
-        do Screen.drawLine(x+21,y+21,x+21,y+23);
-        do Screen.drawLine(x+28,y+21,x+28,y+24);
-        do Screen.drawRectangle(x+26,y+22,x+27,y+26);
-        do Screen.drawLine(x+25,y+25,x+25,y+27);
-        do Screen.drawLine(x+24,y+26,x+24,y+30);
-        do Screen.drawRectangle(x+22,y+27,x+23,y+30);
-        do Screen.drawLine(x+21,y+28,x+21,y+30);
-        do Screen.drawRectangle(x+25,y+29,x+28,y+30);
-        do Screen.drawLine(x+4,y+45,x+4,y+49);
-        do Screen.drawLine(x+45,y+45,x+45,y+49);
-        do Screen.drawRectangle(x+5,y+46,x+44,y+49);
-    return;
+        do Screen.drawRectangle(x+4,y,x+45,y+4);
+        do Screen.drawRectangle(x+2,y+1,x+3,y+50);
+        do Screen.drawRectangle(x+46,y+1,x+47,y+50);
+        do Screen.drawLine(x+1,y+2,x+1,y+49);
+        do Screen.drawLine(x+48,y+2,x+48,y+49);
+        do Screen.drawLine(x,y+3,x,y+48);
+        do Screen.drawLine(x+49,y+3,x+49,y+48);
+        do Screen.drawPixel(x+4,y+5);
+        do Screen.drawPixel(x+45,y+5);
+        do Screen.drawRectangle(x+25,y+20,x+27,y+31);
+        do Screen.drawLine(x+24,y+21,x+24,y+25);
+        do Screen.drawLine(x+28,y+21,x+28,y+30);
+        do Screen.drawLine(x+23,y+23,x+23,y+29);
+        do Screen.drawLine(x+22,y+24,x+22,y+29);
+        do Screen.drawLine(x+21,y+26,x+21,y+29);
+        do Screen.drawLine(x+20,y+27,x+20,y+29);
+        do Screen.drawLine(x+24,y+28,x+24,y+29);
+        do Screen.drawLine(x+29,y+28,x+29,y+29);
+        do Screen.drawRectangle(x+4,y+46,x+45,y+50);
+        return;
     }
 
     function void draw8Fo(int x, int y) 
