@@ -8,6 +8,7 @@ class GameFiled
 	static int y2;
     field int gridSize; // счетчик, размер сетки
 	static Array tiels; // двумерный массив
+	field int as;
 	
 
 	constructor GameFiled new(int count, int size) {
@@ -71,6 +72,8 @@ class GameFiled
 		var int j;
 		var Array tempArr;
 
+
+		
 		let tileSize = 240 / gridSiz; // Размер плитки в зависимости от количества плиток
 
 		// Вертикальные линии
@@ -92,43 +95,43 @@ class GameFiled
 		
 		let tempArr = tiels[0]; //1 строка
 
-		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5));
+		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5), gridSiz);
 		let tempArr[0] = 2;
 		do GameFiled.setScore(2);
 
-		do DrawerNum.drawNum(2, (x1 + 5)+ tileSize, (y1 + 5 ));
+		do DrawerNum.drawNum(2, (x1 + 5)+ tileSize, (y1 + 5 ), gridSiz);
 		let tempArr[1] = 2;
 		do GameFiled.setScore(2);
 
-		do DrawerNum.drawNum(2, (x1 + 5)+(tileSize * 2), (y1 + 5));
+		do DrawerNum.drawNum(2, (x1 + 5)+(tileSize * 2), (y1 + 5), gridSiz);
 		let tempArr[2] = 2;
 		do GameFiled.setScore(2);
 
 		let tempArr = tiels[1]; // 2 строка
 
-		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5) + tileSize);
+		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5) + tileSize, gridSiz);
 		let tempArr[0] = 2;
 		do GameFiled.setScore(2);
 
-		do DrawerNum.drawNum(2, (x1 + 5) + tileSize, (y1 + 5 + tileSize));
+		do DrawerNum.drawNum(2, (x1 + 5) + tileSize, (y1 + 5 + tileSize), gridSiz);
 		let tempArr[1] = 2;
 		do GameFiled.setScore(2);
 
-		do DrawerNum.drawNum(2, (x1 + 5) + (tileSize * 2), (y1 + 5 + tileSize));
+		do DrawerNum.drawNum(2, (x1 + 5) + (tileSize * 2), (y1 + 5 + tileSize), gridSiz);
 		let tempArr[2] = 2;
 		do GameFiled.setScore(2);
 /*
 		let tempArr = tiels[2]; // 3 строка
 
-		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5)+ (tileSize * 2));
+		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5)+ (tileSize * 2), gridSiz);
 		let tempArr[0] = 2;
 		do GameFiled.setScore(2);
 
-		do DrawerNum.drawNum(2, (x1 + 5) + tileSize,  y1 + 5 + (tileSize * 2));
+		do DrawerNum.drawNum(2, (x1 + 5) + tileSize,  y1 + 5 + (tileSize * 2), gridSiz);
 		let tempArr[1] = 2;
 		do GameFiled.setScore(2);
 
-		do DrawerNum.drawNum(2, (x1 + 5) + (tileSize * 2), (y1 + 5 + (tileSize * 2)));
+		do DrawerNum.drawNum(2, (x1 + 5) + (tileSize * 2), (y1 + 5 + (tileSize * 2)), gridSiz);
 		let tempArr[2] = 2;
 		do GameFiled.setScore(2);
 */
@@ -139,7 +142,7 @@ class GameFiled
 		var Array tempArr;
 		var int i, j;
 		var bool addNewTile;
-
+		
 		let addNewTile = false;
 		let i = 0;
 		let j = gridSize - 1;
@@ -152,24 +155,24 @@ class GameFiled
 				if (tempArr[j] = tempArr[j-1] & (~(tempArr[j] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
-					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 					let tempArr[j] = tempArr[j] + tempArr[j-1];
 					let addNewTile = true; // надо добавить новую ячейку
 					let tempArr[j-1] = 0;
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				if (tempArr[j] = 0 & (~(tempArr[j-1] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 					let tempArr[j] = tempArr[j-1];
 					let addNewTile = true; // надо добавить новую ячейку
 					let tempArr[j-1] = 0;
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				let j = j - 1;
@@ -178,6 +181,25 @@ class GameFiled
 			let i = i + 1;
 		}
 		
+		let i = gridSize - 2;
+
+		while(i > 0)
+		{
+			do GameFiled.checkEmptyRight(gridSize);
+			let i = i - 1;
+		}
+		
+		if (addNewTile){
+			do addRandomTile();
+		}
+		
+		return;
+	}
+
+	function void checkEmptyRight(int gridSize)
+	{
+		var int i, j;
+		var Array tempArr, tempArr1;
 		let i = 0;
 		let j = gridSize - 1;
 		while (i < gridSize)
@@ -188,22 +210,17 @@ class GameFiled
 				if (tempArr[j] = 0 & (~(tempArr[j-1] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 					let tempArr[j] = tempArr[j-1];
 					let tempArr[j-1] = 0;
-					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				let j = j - 1;
 			}
 			let j = gridSize - 1;
 			let i = i + 1;
-		}
-
-		if (addNewTile){
-			do addRandomTile();
 		}
 		return;
 	}
@@ -224,24 +241,24 @@ class GameFiled
 				{
 					
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
-					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 					let tempArr[j] = tempArr[j] + tempArr[j+1];
 					let tempArr[j+1] = 0;
 					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				if (tempArr[j] = 0 & (~(tempArr[j+1] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 					let tempArr[j] = tempArr[j+1];
 					let tempArr[j+1] = 0;
 					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j],x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j],x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				let j = j + 1;
@@ -249,6 +266,26 @@ class GameFiled
 			let j = 0;
 			let i = i + 1;
 		}
+		
+		let i = gridSize - 2;
+
+		while(i > 0)
+		{
+			do GameFiled.checkEmptyLeft(gridSize);
+			let i = i - 1;
+		}
+		
+		if (addNewTile){
+			do addRandomTile();
+		}
+		
+		return;
+	}
+
+	function void checkEmptyLeft(int gridSize)
+	{
+		var int i, j;
+		var Array tempArr, tempArr1;	
 		let i = 0;
 		let j = 0;
 		while (i < gridSize)
@@ -259,12 +296,11 @@ class GameFiled
 				if (tempArr[j] = 0 & (~(tempArr[j+1] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 					let tempArr[j] = tempArr[j+1];
 					let tempArr[j+1] = 0;
-					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j],x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j],x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				let j = j + 1;
@@ -272,10 +308,8 @@ class GameFiled
 			let j = 0;
 			let i = i + 1;
 		}
-		if (addNewTile){
-			do addRandomTile();
-		}
 		return;
+
 	}
 
 	method void moveUp(){
@@ -296,24 +330,24 @@ class GameFiled
 				{
 					
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
-					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5, gridSize);
 					let tempArr[j] = tempArr1[j] + tempArr[j];
 					let tempArr1[j] = 0;
 					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5, gridSize);
 					let tempArr[j] = tempArr1[j];
 					let tempArr1[j] = 0;
 					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				let i = i + 1;
@@ -321,6 +355,27 @@ class GameFiled
 			let i = 0;
 			let j = j + 1;
 		}
+		
+		let i = gridSize - 2;
+
+		while(i > 0)
+		{
+			do GameFiled.checkEmptyUp(gridSize);
+			let i = i - 1;
+		}
+
+		
+		if (addNewTile){
+			do addRandomTile();
+		}
+		
+		return;
+	}
+
+	function void checkEmptyUp(int gridSize)
+	{
+		var int i, j;
+		var Array tempArr, tempArr1;
 		let i = 0;
 		let j = 0;
 		while (j < gridSize )
@@ -333,12 +388,11 @@ class GameFiled
 				if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5, gridSize);
 					let tempArr[j] = tempArr1[j];
 					let tempArr1[j] = 0;
-					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				let i = i + 1;
@@ -346,13 +400,12 @@ class GameFiled
 			let i = 0;
 			let j = j + 1;
 		}
-		if (addNewTile){
-			do addRandomTile();
-		}
 		return;
+
 	}
 
-	method void moveDown(){
+	method void moveDown()
+	{
 		var Array tempArr;
 		var Array tempArr1;
 		var int i, j;
@@ -369,24 +422,23 @@ class GameFiled
 				if (tempArr[j] = tempArr1[j] & (~(tempArr[j] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
-					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5, gridSize);
 					let tempArr[j] = tempArr1[j] + tempArr[j];
 					let tempArr1[j] = 0;
-					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5, gridSize);
 					let tempArr[j] = tempArr1[j];
 					let tempArr1[j] = 0;
 					let addNewTile = true; // надо добавить новую ячейку
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				let i = i - 1;
@@ -394,6 +446,26 @@ class GameFiled
 			let i = gridSize - 1;
 			let j = j + 1;
 		}
+		
+		let i = gridSize - 2;
+
+		while(i > 0)
+		{
+			do GameFiled.checkEmptyDown(gridSize);
+			let i = i - 1;
+		}
+
+		if (addNewTile){
+			do addRandomTile();
+		}
+		
+		return;
+	}
+
+	function void checkEmptyDown(int gridSize)
+	{
+		var int i, j;
+		var Array tempArr, tempArr1;
 		let i = gridSize - 1;
 		let j = 0;
 		while (j < gridSize)
@@ -406,12 +478,11 @@ class GameFiled
 				if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
 				{
 					do Screen.setColor(false);
-					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5, gridSize);
 					let tempArr[j] = tempArr1[j];
 					let tempArr1[j] = 0;
-					let addNewTile = true; // надо добавить новую ячейку~
 					do Screen.setColor(true);
-					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 				}
 
 				let i = i - 1;
@@ -419,10 +490,8 @@ class GameFiled
 			let i = gridSize - 1;
 			let j = j + 1;
 		}
-		if (addNewTile){
-			do addRandomTile();
-		}
 		return;
+
 	}
 
 	method void addRandomTile() {
@@ -485,7 +554,7 @@ class GameFiled
 		do GameFiled.setScore(value);
 
         // Отрисовываем новую плитку
-        do DrawerNum.drawNum(value, x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+        do DrawerNum.drawNum(value, x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 		return;
     }
 
