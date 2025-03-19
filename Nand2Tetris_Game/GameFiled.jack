@@ -36,7 +36,8 @@ class GameFiled
         }
         
         do Screen.setColor(true);
-        // рисуется игровое поле
+        
+		// рисуется игровое поле
         do GameFiled.draw(size);
         
         // выводится счёт
@@ -173,9 +174,26 @@ class GameFiled
             let i = i + 1;
         }
         
-        let i = 0;
+		let i = gridSize - 2;
+		while(i > 0)
+		{
+			do GameFiled.checkEmptyRight(gridSize);
+			let i = i - 1;
+		}
+        
+        return;
+    }
+
+	function void checkEmptyRight(int gridSize)
+	{
+		var int i, j;
+		var Array tempArr;
+
+		let i = 0;
         let j = gridSize - 1;
-        while (i < gridSize) {
+
+        while (i < gridSize) 
+		{
             let tempArr = tiels[i]; 
             while (j > 0) {
                 if (tempArr[j] = 0 & (~(tempArr[j-1] = 0))) {
@@ -194,8 +212,8 @@ class GameFiled
             let j = gridSize - 1;
             let i = i + 1;
         }
-        return;
-    }
+		return;
+	}
 
     method void moveLeft() {
         var Array tempArr;
@@ -235,7 +253,23 @@ class GameFiled
             let j = 0;
             let i = i + 1;
         }
-        let i = 0;
+
+		let i = gridSize - 2;
+		while(i > 0)
+		{
+			do GameFiled.checkEmptyLeft(gridSize);
+			let i = i - 1;
+		}
+        
+        return;
+    }
+
+	function void checkEmptyLeft(int gridSize)
+	{
+		var int i, j;
+		var Array tempArr;
+
+		let i = 0;
         let j = 0;
         while (i < gridSize) {
             let tempArr = tiels[i]; 
@@ -256,8 +290,8 @@ class GameFiled
             let j = 0;
             let i = i + 1;
         }
-        return;
-    }
+		return;
+	}
 
     method void moveUp() {
         var Array tempArr;
@@ -299,7 +333,23 @@ class GameFiled
             let i = 0;
             let j = j + 1;
         }
-        let i = 0;
+        
+		let i = gridSize - 2;
+		while(i > 0)
+		{
+			do GameFiled.checkEmptyUp(gridSize);
+			let i = i - 1;
+		}
+
+        return;
+    }
+
+	function void checkEmptyUp(int gridSize)
+	{
+	    var int i, j;
+		var Array tempArr, tempArr1;
+
+		let i = 0;
         let j = 0;
         while (j < gridSize) {
             while (i < (gridSize - 1)) {
@@ -321,9 +371,9 @@ class GameFiled
             }
             let i = 0;
             let j = j + 1;
-        }
-        return;
-    }
+        }	
+		return;
+	}
 
     method void moveDown() {
         var Array tempArr;
@@ -365,7 +415,22 @@ class GameFiled
             let i = gridSize - 1;
             let j = j + 1;
         }
-        let i = gridSize - 1;
+        
+		let i = gridSize - 2;
+		while(i > 0)
+		{
+			do GameFiled.checkEmptyDowm(gridSize);
+			let i = i - 1;
+		}
+        return;
+    }
+
+	function void checkEmptyDowm(int gridSize)
+	{
+		var int i, j;
+		var Array tempArr, tempArr1;
+
+		let i = gridSize - 1;
         let j = 0;
         while (j < gridSize) {
             while (i > 0) {
@@ -388,7 +453,7 @@ class GameFiled
             let i = gridSize - 1;
             let j = j + 1;
         }
-        return;
-    }
+		return;
+	}
 
 }
