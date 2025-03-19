@@ -1,0 +1,20 @@
+function Utils.init 0
+push constant 12345
+pop static 0
+push constant 0
+return
+function Utils.random 0
+push static 0
+push constant 32767
+call Math.multiply 2
+push constant 12345
+add
+push constant 32767
+and
+pop static 0
+push static 0
+push constant 32767
+call Math.divide 2
+push argument 0
+call Math.multiply 2
+return

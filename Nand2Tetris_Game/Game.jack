@@ -71,6 +71,12 @@ class Game{
                     do gameFiled.moveDown();// press S
                 }
 				
+                // Проверка конца
+                if (gameFiled.isGameOver()) {
+                    do Output.printString("Game Over!");
+                    let exit = true;  // Закрываем игру
+                }
+
 				// waits for the key to be released
 				while (~(key = 0)) {
 					let key = Keyboard.keyPressed(); 

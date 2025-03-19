@@ -493,6 +493,13 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+call GameFiled.setScore 1
+pop temp 0
 push constant 0
 not
 call Screen.setColor 1
@@ -813,6 +820,9 @@ add
 pop local 1
 goto WHILE_EXP2
 label WHILE_END2
+push pointer 0
+call GameFiled.addRandomTile 1
+pop temp 0
 push constant 0
 return
 function GameFiled.moveLeft 3
@@ -962,6 +972,13 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+call GameFiled.setScore 1
+pop temp 0
 push constant 0
 not
 call Screen.setColor 1
@@ -1278,6 +1295,9 @@ add
 pop local 1
 goto WHILE_EXP2
 label WHILE_END2
+push pointer 0
+call GameFiled.addRandomTile 1
+pop temp 0
 push constant 0
 return
 function GameFiled.moveUp 4
@@ -1427,6 +1447,13 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+call GameFiled.setScore 1
+pop temp 0
 push constant 0
 not
 call Screen.setColor 1
@@ -1735,6 +1762,9 @@ add
 pop local 3
 goto WHILE_EXP2
 label WHILE_END2
+push pointer 0
+call GameFiled.addRandomTile 1
+pop temp 0
 push constant 0
 return
 function GameFiled.moveDown 4
@@ -1884,6 +1914,13 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+call GameFiled.setScore 1
+pop temp 0
 push constant 0
 not
 call Screen.setColor 1
@@ -2196,5 +2233,389 @@ add
 pop local 3
 goto WHILE_EXP2
 label WHILE_END2
+push pointer 0
+call GameFiled.addRandomTile 1
+pop temp 0
 push constant 0
+return
+function GameFiled.addRandomTile 7
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push this 0
+lt
+not
+if-goto WHILE_END0
+push local 1
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 6
+push constant 0
+pop local 2
+label WHILE_EXP1
+push local 2
+push this 0
+lt
+not
+if-goto WHILE_END1
+push local 2
+push local 6
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push constant 1
+add
+pop local 0
+label IF_FALSE0
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP1
+label WHILE_END1
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+push constant 0
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push local 0
+push constant 2
+call Math.multiply 2
+call Array.new 1
+pop local 5
+push constant 0
+pop local 1
+push constant 0
+pop local 2
+push constant 0
+pop local 3
+label WHILE_EXP2
+push local 1
+push this 0
+lt
+not
+if-goto WHILE_END2
+push local 1
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 6
+push constant 0
+pop local 2
+label WHILE_EXP3
+push local 2
+push this 0
+lt
+not
+if-goto WHILE_END3
+push local 2
+push local 6
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 3
+push local 5
+add
+push local 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push constant 1
+add
+push local 5
+add
+push local 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push constant 2
+add
+pop local 3
+label IF_FALSE2
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP3
+label WHILE_END3
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP2
+label WHILE_END2
+push local 0
+call Utils.random 1
+push constant 2
+call Math.multiply 2
+pop local 3
+push local 3
+push local 5
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 3
+push constant 1
+add
+push local 5
+add
+pop pointer 1
+push that 0
+pop local 2
+push constant 2
+call Utils.random 1
+push constant 2
+call Math.multiply 2
+push constant 2
+add
+pop local 4
+push local 1
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 6
+push local 2
+push local 6
+add
+push local 4
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push constant 0
+return
+function GameFiled.isGameOver 4
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 0
+push this 0
+lt
+not
+if-goto WHILE_END0
+push local 0
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 2
+label WHILE_EXP1
+push local 1
+push this 0
+lt
+not
+if-goto WHILE_END1
+push local 1
+push local 2
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push constant 1
+add
+pop local 0
+push constant 0
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP2
+push local 0
+push this 0
+lt
+not
+if-goto WHILE_END2
+push local 0
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 2
+label WHILE_EXP3
+push local 1
+push this 0
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END3
+push local 1
+push local 2
+add
+pop pointer 1
+push that 0
+push local 1
+push constant 1
+add
+push local 2
+add
+pop pointer 1
+push that 0
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP3
+label WHILE_END3
+push local 0
+push constant 1
+add
+pop local 0
+push constant 0
+pop local 1
+goto WHILE_EXP2
+label WHILE_END2
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP4
+push local 1
+push this 0
+lt
+not
+if-goto WHILE_END4
+label WHILE_EXP5
+push local 0
+push this 0
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END5
+push local 0
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 2
+push local 0
+push constant 1
+add
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 3
+push local 1
+push local 2
+add
+pop pointer 1
+push that 0
+push local 1
+push local 3
+add
+pop pointer 1
+push that 0
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+return
+label IF_FALSE2
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP5
+label WHILE_END5
+push constant 0
+pop local 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP4
+label WHILE_END4
+push constant 0
+not
 return

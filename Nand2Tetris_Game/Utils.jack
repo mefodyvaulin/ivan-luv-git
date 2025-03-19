@@ -1,0 +1,15 @@
+class Utils {
+
+    static int seed;
+
+    function void init() {
+        let seed = 12345;
+        return;
+    }
+
+    function int random(int max) {
+        let seed = (seed * 32767 + 12345) & 32767;
+        return (seed / 32767) * max; // Генерация случайного числа
+    }
+
+}

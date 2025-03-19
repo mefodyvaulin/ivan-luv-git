@@ -154,6 +154,7 @@ class GameFiled
 					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
 					let tempArr[j] = tempArr[j] + tempArr[j-1];
 					let tempArr[j-1] = 0;
+                	do GameFiled.setScore(tempArr[j]);  // Добавляем очки
 					do Screen.setColor(true);
 					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
 				}
@@ -196,6 +197,7 @@ class GameFiled
 			let j = gridSize - 1;
 			let i = i + 1;
 		}
+		do addRandomTile();
 		return;
 	}
 
@@ -218,6 +220,7 @@ class GameFiled
 					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
 					let tempArr[j] = tempArr[j] + tempArr[j+1];
 					let tempArr[j+1] = 0;
+					do GameFiled.setScore(tempArr[j]);  // Добавляем очки
 					do Screen.setColor(true);
 					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
 				}
@@ -259,6 +262,7 @@ class GameFiled
 			let j = 0;
 			let i = i + 1;
 		}
+		do addRandomTile();
 		return;
 	}
 
@@ -283,6 +287,7 @@ class GameFiled
 					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5);
 					let tempArr[j] = tempArr1[j] + tempArr[j];
 					let tempArr1[j] = 0;
+					do GameFiled.setScore(tempArr[j]);  // Добавляем очки
 					do Screen.setColor(true);
 					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
 				}
@@ -326,6 +331,7 @@ class GameFiled
 			let i = 0;
 			let j = j + 1;
 		}
+		do addRandomTile();
 		return;
 	}
 
@@ -349,6 +355,7 @@ class GameFiled
 					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5);
 					let tempArr[j] = tempArr1[j] + tempArr[j];
 					let tempArr1[j] = 0;
+					do GameFiled.setScore(tempArr[j]);  // Добавляем очки
 					do Screen.setColor(true);
 					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
 				}
@@ -392,7 +399,125 @@ class GameFiled
 			let i = gridSize - 1;
 			let j = j + 1;
 		}
+		do addRandomTile();
 		return;
+	}
+
+	method void addRandomTile() {
+        var int emptyCount, i, j, index, value;
+        var Array emptyCells;
+        var Array tempArr;
+
+        // Подсчет пустых ячеек
+        let emptyCount = 0;
+        let i = 0;
+        while (i < gridSize) {
+            let tempArr = tiels[i];
+            let j = 0;
+            while (j < gridSize) {
+                if (tempArr[j] = 0) {
+                    let emptyCount = emptyCount + 1;
+                }
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
+
+        // Если нет пустых ячеек, выходим
+        if (emptyCount = 0) {
+            return;
+        }
+
+        // Создаем массив для хранения координат пустых ячеек
+        let emptyCells = Array.new(emptyCount * 2);
+        let i = 0;
+        let j = 0;
+        let index = 0;
+
+        // Заполняем массив координатами пустых ячеек
+        while (i < gridSize) {
+            let tempArr = tiels[i];
+            let j = 0;
+            while (j < gridSize) {
+                if (tempArr[j] = 0) {
+                    let emptyCells[index] = i; // строка
+                    let emptyCells[index + 1] = j; // столбец
+                    let index = index + 2;
+                }
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
+
+        // Выбираем случайную пустую ячейку
+        let index = Utils.random(emptyCount) * 2;
+        let i = emptyCells[index];
+        let j = emptyCells[index + 1];
+
+        // Генерируем новое число (2 или 4)
+        let value = Utils.random(2) * 2 + 2;
+
+        // Устанавливаем новое значение в ячейку
+        let tempArr = tiels[i];
+        let tempArr[j] = value;
+
+        // Отрисовываем новую плитку
+        do DrawerNum.drawNum(value, x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+		return;
+    }
+
+	method bool isGameOver() {
+		var int i, j;
+		var Array tempArr, tempArr1;
+
+		// Проверяем, есть ли пустые клетки
+		let i = 0;
+		let j = 0;
+		while (i < gridSize) {
+			let tempArr = tiels[i]; // Объявляем tempArr для каждой строки
+			while (j < gridSize) {
+				if (tempArr[j] = 0) {
+					return false;  // Есть пустая клетка, игра продолжается
+				}
+				let j = j + 1;
+			}
+			let i = i + 1;
+			let j = 0;
+		}
+
+		// Проверяем, можно ли сделать слияние плиток по горизонтали
+		let i = 0;
+		let j = 0;
+		while (i < gridSize) {
+			let tempArr = tiels[i];  // Объявляем tempArr для каждой строки
+			while (j < (gridSize - 1)) {
+				if (tempArr[j] = tempArr[j+1]) {
+					return false;  // Можно объединить плитки по горизонтали
+				}
+				let j = j + 1;
+			}
+			let i = i + 1;
+			let j = 0;
+		}
+
+		// Проверяем, можно ли сделать слияние плиток по вертикали
+		let i = 0;
+		let j = 0;
+		while (j < gridSize) {
+			while (i < (gridSize - 1)) {
+				let tempArr = tiels[i];
+				let tempArr1 = tiels[i+1]; // Объявляем tempArr1 для соседних строк
+				if (tempArr[j] = tempArr1[j]) {
+					return false;  // Можно объединить плитки по вертикали
+				}
+				let i = i + 1;
+			}
+			let i = 0;
+			let j = j + 1;
+		}
+
+		// Если не осталось пустых клеток и плитки не могут быть объединены
+		return true;  // Игра закончена
 	}
 
 }
