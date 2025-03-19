@@ -150,6 +150,39 @@ push this 0
 call GameFiled.moveDown 1
 pop temp 0
 label IF_FALSE7
+push this 0
+call GameFiled.isGameOver 1
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push constant 10
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 118
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 0
+not
+pop local 2
+label IF_FALSE8
 label WHILE_EXP2
 push local 0
 push constant 0
