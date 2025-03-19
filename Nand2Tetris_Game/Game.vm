@@ -28,7 +28,7 @@ push this 0
 call GameFiled.getSize 1
 pop local 1
 push local 0
-push constant 81
+push constant 49
 eq
 push local 1
 push constant 3
@@ -49,7 +49,7 @@ call GameFiled.new 2
 pop this 0
 label IF_FALSE0
 push local 0
-push constant 87
+push constant 50
 eq
 push local 1
 push constant 4
@@ -70,7 +70,7 @@ call GameFiled.new 2
 pop this 0
 label IF_FALSE1
 push local 0
-push constant 69
+push constant 51
 eq
 push local 1
 push constant 5
@@ -91,7 +91,7 @@ call GameFiled.new 2
 pop this 0
 label IF_FALSE2
 push local 0
-push constant 82
+push constant 52
 eq
 push local 1
 push constant 2
@@ -110,6 +110,46 @@ push constant 0
 not
 pop local 2
 label IF_FALSE3
+push local 0
+push constant 68
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push this 0
+call GameFiled.moveRight 1
+pop temp 0
+label IF_FALSE4
+push local 0
+push constant 65
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 0
+call GameFiled.moveLeft 1
+pop temp 0
+label IF_FALSE5
+push local 0
+push constant 87
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push this 0
+call GameFiled.moveUp 1
+pop temp 0
+label IF_FALSE6
+push local 0
+push constant 83
+eq
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push this 0
+call GameFiled.moveDown 1
+pop temp 0
+label IF_FALSE7
 label WHILE_EXP2
 push local 0
 push constant 0

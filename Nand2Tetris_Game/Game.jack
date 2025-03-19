@@ -7,10 +7,14 @@ class Game{
     }
 
     /* Базовый метод работы игры 
-        Q - сменить игровой режим на 3 на 3
-        W - сменить игровой режим на 4 на 4
-        E - сменить игровой режим на 5 на 5
-        R - выйти из игры (пока только стиарет поле, но из игры не выходит)
+        1 - сменить игровой режим на 3 на 3
+        2 - сменить игровой режим на 4 на 4
+        3 - сменить игровой режим на 5 на 5
+        4 - выйти из игры (пока только стиарет поле, но из игры не выходит)
+        W - вверх
+        S - вниз
+        A - влево
+        D - вправо
         */
 	method void run() {
 		var char key; // the key currently pressed by the user
@@ -25,32 +29,51 @@ class Game{
 				let key = Keyboard.keyPressed(); 
                 let size = gameFiled.getSize();
 
-				if ((key = 81) & (~(size = 3))) {
+				if ((key = 49) & (~(size = 3))) {
                     do Screen.clearScreen();
                     do gameFiled.dispose();
-                    let gameFiled = GameFiled.new(0,3); // press q
+                    let gameFiled = GameFiled.new(0,3); // press 1
 				} 
-				if ((key = 87) & (~(size = 4))) { 
+				if ((key = 50) & (~(size = 4))) { 
                     do Screen.clearScreen();
                     do gameFiled.dispose();
-                    let gameFiled = GameFiled.new(0,4); // press w
+                    let gameFiled = GameFiled.new(0,4); // press 2
 				} 
-				if ((key = 69) & (~(size = 5))) { 
+				if ((key = 51) & (~(size = 5))) { 
  
                     do Screen.clearScreen();
                     do gameFiled.dispose();
-                    let gameFiled = GameFiled.new(0,5); // press e
+                    let gameFiled = GameFiled.new(0,5); // press 3
 				}
-                if ((key = 82)& (~(size = 2))) { 
+                if ((key = 52)& (~(size = 2))) { 
                     do Screen.clearScreen();
                     do gameFiled.dispose();
-                    let exit = true; // press r
+                    let exit = true; // press 4
 				}  
+
+                if (key = 68)
+                {
+                    do gameFiled.moveRight(); // press D
+                }
+
+                if (key = 65)
+                {
+                    do gameFiled.moveLeft();// press A
+                }
+
+                if (key = 87)
+                {
+                    do gameFiled.moveUp();// press W
+                }
+
+                if (key = 83)
+                {
+                    do gameFiled.moveDown();// press S
+                }
 				
 				// waits for the key to be released
 				while (~(key = 0)) {
 					let key = Keyboard.keyPressed(); 
-
 				}
 			} 
             return;

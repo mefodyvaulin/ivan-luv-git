@@ -1,14 +1,26 @@
 function GameFiled.new 3
-push constant 3
+push constant 1
 call Memory.alloc 1
 pop pointer 0
 push argument 0
-pop this 0
+pop static 0
 push argument 1
-pop this 1
+pop this 0
+push constant 136
+pop static 1
+push constant 8
+pop static 2
+push constant 136
+push constant 240
+add
+pop static 3
+push constant 8
+push constant 240
+add
+pop static 4
 push argument 1
 call Array.new 1
-pop this 2
+pop static 5
 push constant 0
 pop local 0
 push constant 0
@@ -20,7 +32,7 @@ lt
 not
 if-goto WHILE_END0
 push local 0
-push this 2
+push static 5
 add
 push argument 1
 call Array.new 1
@@ -35,7 +47,7 @@ lt
 not
 if-goto WHILE_END1
 push local 0
-push this 2
+push static 5
 add
 pop pointer 1
 push that 0
@@ -62,9 +74,28 @@ add
 pop local 0
 goto WHILE_EXP0
 label WHILE_END0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
 push argument 1
 call GameFiled.draw 1
 pop temp 0
+push constant 0
+call GameFiled.setScore 1
+pop temp 0
+push pointer 0
+return
+function GameFiled.getSize 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function GameFiled.setScore 0
+push static 0
+push argument 0
+add
+pop static 0
 push constant 1
 push constant 1
 call Output.moveCursor 2
@@ -85,15 +116,10 @@ push constant 58
 call String.appendChar 2
 call Output.printString 1
 pop temp 0
-push this 0
+push static 0
 call Output.printInt 1
 pop temp 0
-push pointer 0
-return
-function GameFiled.getSize 0
-push argument 0
-pop pointer 0
-push this 1
+push constant 0
 return
 function GameFiled.dispose 0
 push argument 0
@@ -103,7 +129,7 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-function GameFiled.draw 3
+function GameFiled.draw 4
 push constant 240
 push argument 0
 call Math.divide 2
@@ -118,18 +144,18 @@ add
 lt
 not
 if-goto WHILE_END0
-push constant 136
+push static 1
 push local 1
 push local 0
 call Math.multiply 2
 add
-push constant 8
-push constant 136
+push static 2
+push static 1
 push local 1
 push local 0
 call Math.multiply 2
 add
-push constant 248
+push static 4
 call Screen.drawLine 4
 pop temp 0
 push local 1
@@ -148,14 +174,14 @@ add
 lt
 not
 if-goto WHILE_END1
-push constant 136
-push constant 8
+push static 1
+push static 2
 push local 2
 push local 0
 call Math.multiply 2
 add
-push constant 376
-push constant 8
+push static 3
+push static 2
 push local 2
 push local 0
 call Math.multiply 2
@@ -168,23 +194,2007 @@ add
 pop local 2
 goto WHILE_EXP1
 label WHILE_END1
-push constant 136
+push constant 0
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 3
+push constant 2
+push static 1
 push constant 5
 add
-push constant 8
+push static 2
 push constant 5
 add
-call DrawerNum.drawTwoTri 2
+call DrawerNum.drawNum 3
 pop temp 0
-push constant 136
+push constant 0
+push local 3
+add
+push constant 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+call GameFiled.setScore 1
+pop temp 0
+push constant 2
+push static 1
 push constant 5
 add
-push constant 8
 push local 0
 add
+push static 2
 push constant 5
 add
-call DrawerNum.drawTwoTri 2
+call DrawerNum.drawNum 3
 pop temp 0
+push constant 1
+push local 3
+add
+push constant 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+call GameFiled.setScore 1
+pop temp 0
+push constant 2
+push static 1
+push constant 5
+add
+push local 0
+push constant 2
+call Math.multiply 2
+add
+push static 2
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push constant 2
+push local 3
+add
+push constant 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+call GameFiled.setScore 1
+pop temp 0
+push constant 1
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 3
+push constant 2
+push static 1
+push constant 5
+add
+push static 2
+push constant 5
+add
+push local 0
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push constant 0
+push local 3
+add
+push constant 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+call GameFiled.setScore 1
+pop temp 0
+push constant 2
+push static 1
+push constant 5
+add
+push local 0
+add
+push static 2
+push constant 5
+add
+push local 0
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push constant 1
+push local 3
+add
+push constant 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+call GameFiled.setScore 1
+pop temp 0
+push constant 2
+push static 1
+push constant 5
+add
+push local 0
+push constant 2
+call Math.multiply 2
+add
+push static 2
+push constant 5
+add
+push local 0
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push constant 2
+push local 3
+add
+push constant 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+call GameFiled.setScore 1
+pop temp 0
+push constant 0
+return
+function GameFiled.moveRight 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+push this 0
+push constant 1
+sub
+pop local 2
+label WHILE_EXP0
+push local 1
+push this 0
+lt
+not
+if-goto WHILE_END0
+push local 1
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 0
+label WHILE_EXP1
+push local 2
+push constant 0
+gt
+not
+if-goto WHILE_END1
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+eq
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+sub
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 2
+push local 0
+add
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+sub
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+sub
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 2
+push local 0
+add
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+sub
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE1
+push local 2
+push constant 1
+sub
+pop local 2
+goto WHILE_EXP1
+label WHILE_END1
+push this 0
+push constant 1
+sub
+pop local 2
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+pop local 1
+push this 0
+push constant 1
+sub
+pop local 2
+label WHILE_EXP2
+push local 1
+push this 0
+lt
+not
+if-goto WHILE_END2
+push local 1
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 0
+label WHILE_EXP3
+push local 2
+push constant 0
+gt
+not
+if-goto WHILE_END3
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+sub
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 2
+push local 0
+add
+push local 2
+push constant 1
+sub
+push local 0
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+sub
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE2
+push local 2
+push constant 1
+sub
+pop local 2
+goto WHILE_EXP3
+label WHILE_END3
+push this 0
+push constant 1
+sub
+pop local 2
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP2
+label WHILE_END2
+push constant 0
+return
+function GameFiled.moveLeft 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 1
+push this 0
+lt
+not
+if-goto WHILE_END0
+push local 1
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 0
+label WHILE_EXP1
+push local 2
+push this 0
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END1
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+eq
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+add
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 2
+push local 0
+add
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+add
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+add
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 2
+push local 0
+add
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+add
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE1
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP1
+label WHILE_END1
+push constant 0
+pop local 2
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+pop local 1
+push constant 0
+pop local 2
+label WHILE_EXP2
+push local 1
+push this 0
+lt
+not
+if-goto WHILE_END2
+push local 1
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 0
+label WHILE_EXP3
+push local 2
+push this 0
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END3
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+add
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 2
+push local 0
+add
+push local 2
+push constant 1
+add
+push local 0
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+add
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 1
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE2
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP3
+label WHILE_END3
+push constant 0
+pop local 2
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP2
+label WHILE_END2
+push constant 0
+return
+function GameFiled.moveUp 4
+push argument 0
+pop pointer 0
+push constant 0
+pop local 2
+push constant 0
+pop local 3
+label WHILE_EXP0
+push local 3
+push this 0
+lt
+not
+if-goto WHILE_END0
+label WHILE_EXP1
+push local 2
+push this 0
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END1
+push local 2
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 2
+push constant 1
+add
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+eq
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+add
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 3
+push local 0
+add
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push local 1
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+add
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 3
+push local 0
+add
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push local 1
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE1
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP1
+label WHILE_END1
+push constant 0
+pop local 2
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+pop local 2
+push constant 0
+pop local 3
+label WHILE_EXP2
+push local 3
+push this 0
+lt
+not
+if-goto WHILE_END2
+label WHILE_EXP3
+push local 2
+push this 0
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END3
+push local 2
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 2
+push constant 1
+add
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+add
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 3
+push local 0
+add
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push local 1
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE2
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP3
+label WHILE_END3
+push constant 0
+pop local 2
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP2
+label WHILE_END2
+push constant 0
+return
+function GameFiled.moveDown 4
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+sub
+pop local 2
+push constant 0
+pop local 3
+label WHILE_EXP0
+push local 3
+push this 0
+lt
+not
+if-goto WHILE_END0
+label WHILE_EXP1
+push local 2
+push constant 0
+gt
+not
+if-goto WHILE_END1
+push local 2
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 2
+push constant 1
+sub
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+eq
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+sub
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 3
+push local 0
+add
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push local 1
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+sub
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 3
+push local 0
+add
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push local 1
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE1
+push local 2
+push constant 1
+sub
+pop local 2
+goto WHILE_EXP1
+label WHILE_END1
+push this 0
+push constant 1
+sub
+pop local 2
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP0
+label WHILE_END0
+push this 0
+push constant 1
+sub
+pop local 2
+push constant 0
+pop local 3
+label WHILE_EXP2
+push local 3
+push this 0
+lt
+not
+if-goto WHILE_END2
+label WHILE_EXP3
+push local 2
+push constant 0
+gt
+not
+if-goto WHILE_END3
+push local 2
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 2
+push constant 1
+sub
+push static 5
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+push constant 1
+sub
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+push local 3
+push local 0
+add
+push local 3
+push local 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push local 1
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push local 3
+push local 0
+add
+pop pointer 1
+push that 0
+push static 1
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 3
+call Math.multiply 2
+add
+push constant 5
+add
+push static 2
+push static 3
+push static 1
+sub
+push this 0
+call Math.divide 2
+push local 2
+call Math.multiply 2
+add
+push constant 5
+add
+call DrawerNum.drawNum 3
+pop temp 0
+label IF_FALSE2
+push local 2
+push constant 1
+sub
+pop local 2
+goto WHILE_EXP3
+label WHILE_END3
+push this 0
+push constant 1
+sub
+pop local 2
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP2
+label WHILE_END2
 push constant 0
 return

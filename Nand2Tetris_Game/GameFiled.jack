@@ -1,13 +1,25 @@
 class GameFiled 
 {
-    field int score, gridSize; // счетчик, размер сетки
-	field Array tiels; // двумерный массив
+
+	static int score;
+	static int x1;
+	static int y1;
+	static int x2;
+	static int y2;
+    field int gridSize; // счетчик, размер сетки
+	static Array tiels; // двумерный массив
+	
 
 	constructor GameFiled new(int count, int size) {
 		var int i, j;
 		var Array tempArr;
 		let score = count;
 		let gridSize = size;
+		
+		let x1 = 136;
+		let y1 = 8;
+		let x2 = (136 + 240);
+		let y2 = (8 + 240);
 
 		//инициализируется двумерный массив соответствующий игровому полю
 		let tiels = Array.new(size);
@@ -24,13 +36,12 @@ class GameFiled
 			let i = i + 1;
 		}
 		
+		do Screen.setColor(true);
 		// рисуется игрове поле
 		do GameFiled.draw(size);
 		
 		// выводится счет
-		do Output.moveCursor(1, 1);
-		do Output.printString("Score:");
-		do Output.printInt(score);
+		do GameFiled.setScore(0);
 
 		return this;
 	}
@@ -38,6 +49,15 @@ class GameFiled
 	method int getSize() {
         return gridSize; // Доступ к полю вне класса
     }
+
+
+	function void setScore(int bonus){
+		let score = score + bonus;
+		do Output.moveCursor(1, 1);
+		do Output.printString("Score:");
+		do Output.printInt(score);
+		return;
+	}
 
 	method void dispose() {
 		do Memory.deAlloc(this);
@@ -49,27 +69,329 @@ class GameFiled
 		var int tileSize;
 		var int i;
 		var int j;
+		var Array tempArr;
 
 		let tileSize = 240 / gridSiz; // Размер плитки в зависимости от количества плиток
-
 
 		// Вертикальные линии
 		let i = 0;
 		while (i < (gridSiz + 1)) {
-			do Screen.drawLine(136 + (i * tileSize), 8, 136 + (i * tileSize), 248); 
+			do Screen.drawLine(x1 + (i * tileSize), y1, x1 + (i * tileSize), y2); 
 			let i = i + 1;
 		}
 
 		// Горизонтальные линии
 		let j = 0;
 		while (j < (gridSiz + 1)) {
-			do Screen.drawLine(136, 8 + (j * tileSize), 376, 8 + (j * tileSize)); 
+			do Screen.drawLine(x1, y1 + (j * tileSize), x2, y1 + (j * tileSize)); 
 			let j = j + 1;
 		}
 
-		//врменные строки для проверки вывода ячеек
-		do DrawerNum.drawTwoTri((136+5), (8+5));
-		do DrawerNum.drawTwoTri((136 + 5), (8 + tileSize +5));
+		
+		//начальные ячейки
+		
+		let tempArr = tiels[0]; //1 строка
+
+		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5));
+		let tempArr[0] = 2;
+		do GameFiled.setScore(2);
+
+		do DrawerNum.drawNum(2, (x1 + 5)+ tileSize, (y1 + 5 ));
+		let tempArr[1] = 2;
+		do GameFiled.setScore(2);
+
+		do DrawerNum.drawNum(2, (x1 + 5)+(tileSize * 2), (y1 + 5));
+		let tempArr[2] = 2;
+		do GameFiled.setScore(2);
+
+		let tempArr = tiels[1]; // 2 строка
+
+		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5) + tileSize);
+		let tempArr[0] = 2;
+		do GameFiled.setScore(2);
+
+		do DrawerNum.drawNum(2, (x1 + 5) + tileSize, (y1 + 5 + tileSize));
+		let tempArr[1] = 2;
+		do GameFiled.setScore(2);
+
+		do DrawerNum.drawNum(2, (x1 + 5) + (tileSize * 2), (y1 + 5 + tileSize));
+		let tempArr[2] = 2;
+		do GameFiled.setScore(2);
+/*
+		let tempArr = tiels[2]; // 3 строка
+
+		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5)+ (tileSize * 2));
+		let tempArr[0] = 2;
+		do GameFiled.setScore(2);
+
+		do DrawerNum.drawNum(2, (x1 + 5) + tileSize,  y1 + 5 + (tileSize * 2));
+		let tempArr[1] = 2;
+		do GameFiled.setScore(2);
+
+		do DrawerNum.drawNum(2, (x1 + 5) + (tileSize * 2), (y1 + 5 + (tileSize * 2)));
+		let tempArr[2] = 2;
+		do GameFiled.setScore(2);
+*/
+		return;
+	}
+
+	method void moveRight(){
+		var Array tempArr;
+		var int i, j;
+
+		let i = 0;
+		let j = gridSize - 1;
+		while (i < gridSize)
+		{
+			let tempArr = tiels[i]; 
+			while (j > 0)
+			{
+				if (tempArr[j] = tempArr[j-1] & (~(tempArr[j] = 0)))
+				{
+					
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					let tempArr[j] = tempArr[j] + tempArr[j-1];
+					let tempArr[j-1] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				if (tempArr[j] = 0 & (~(tempArr[j-1] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					let tempArr[j] = tempArr[j-1];
+					let tempArr[j-1] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				let j = j - 1;
+			}
+			let j = gridSize - 1;
+			let i = i + 1;
+		}
+		
+		let i = 0;
+		let j = gridSize - 1;
+		while (i < gridSize)
+		{
+			let tempArr = tiels[i]; 
+			while (j > 0)
+			{
+				if (tempArr[j] = 0 & (~(tempArr[j-1] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					let tempArr[j] = tempArr[j-1];
+					let tempArr[j-1] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				let j = j - 1;
+			}
+			let j = gridSize - 1;
+			let i = i + 1;
+		}
+		return;
+	}
+
+	method void moveLeft(){
+		var Array tempArr;
+		var int i, j;
+
+		let i = 0;
+		let j = 0;
+		while (i < gridSize)
+		{
+			let tempArr = tiels[i]; 
+			while (j < (gridSize - 1))
+			{
+				if (tempArr[j] = tempArr[j+1] & (~(tempArr[j] = 0)))
+				{
+					
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					let tempArr[j] = tempArr[j] + tempArr[j+1];
+					let tempArr[j+1] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				if (tempArr[j] = 0 & (~(tempArr[j+1] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					let tempArr[j] = tempArr[j+1];
+					let tempArr[j+1] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j],x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				let j = j + 1;
+			}
+			let j = 0;
+			let i = i + 1;
+		}
+		let i = 0;
+		let j = 0;
+		while (i < gridSize)
+		{
+			let tempArr = tiels[i]; 
+			while (j < (gridSize - 1))
+			{
+				if (tempArr[j] = 0 & (~(tempArr[j+1] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					let tempArr[j] = tempArr[j+1];
+					let tempArr[j+1] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j],x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				let j = j + 1;
+			}
+			let j = 0;
+			let i = i + 1;
+		}
+		return;
+	}
+
+	method void moveUp(){
+		var Array tempArr;
+		var Array tempArr1;
+		var int i, j;
+
+		let i = 0;
+		let j = 0;
+		while (j < gridSize )
+		{
+			while (i < (gridSize - 1))
+			{
+				let tempArr = tiels[i];
+				let tempArr1 = tiels[i+1];
+				if (tempArr[j] = tempArr1[j] & (~(tempArr[j] = 0)))
+				{
+					
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5);
+					let tempArr[j] = tempArr1[j] + tempArr[j];
+					let tempArr1[j] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5);
+					let tempArr[j] = tempArr1[j];
+					let tempArr1[j] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				let i = i + 1;
+			}
+			let i = 0;
+			let j = j + 1;
+		}
+		let i = 0;
+		let j = 0;
+		while (j < gridSize )
+		{
+			while (i < (gridSize - 1))
+			{
+				let tempArr = tiels[i];
+				let tempArr1 = tiels[i+1];
+				
+				if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5);
+					let tempArr[j] = tempArr1[j];
+					let tempArr1[j] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				let i = i + 1;
+			}
+			let i = 0;
+			let j = j + 1;
+		}
+		return;
+	}
+
+	method void moveDown(){
+		var Array tempArr;
+		var Array tempArr1;
+		var int i, j;
+
+		let i = gridSize - 1;
+		let j = 0;
+		while (j < gridSize)
+		{
+			while (i > 0)
+			{
+				let tempArr = tiels[i];
+				let tempArr1 = tiels[i-1];
+				if (tempArr[j] = tempArr1[j] & (~(tempArr[j] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5);
+					let tempArr[j] = tempArr1[j] + tempArr[j];
+					let tempArr1[j] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5);
+					let tempArr[j] = tempArr1[j];
+					let tempArr1[j] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				let i = i - 1;
+			}
+			let i = gridSize - 1;
+			let j = j + 1;
+		}
+		let i = gridSize - 1;
+		let j = 0;
+		while (j < gridSize)
+		{
+			while (i > 0)
+			{
+				let tempArr = tiels[i];
+				let tempArr1 = tiels[i-1];
+				
+				if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
+				{
+					do Screen.setColor(false);
+					do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5);
+					let tempArr[j] = tempArr1[j];
+					let tempArr1[j] = 0;
+					do Screen.setColor(true);
+					do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5);
+				}
+
+				let i = i - 1;
+			}
+			let i = gridSize - 1;
+			let j = j + 1;
+		}
 		return;
 	}
 
