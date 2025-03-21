@@ -91,6 +91,9 @@ push argument 0
 pop pointer 0
 push this 0
 return
+function GameFiled.getScore 0
+push static 0
+return
 function GameFiled.setScore 0
 push static 0
 push argument 0
@@ -2032,11 +2035,7 @@ pop local 0
 goto WHILE_EXP0
 label WHILE_END0
 push local 2
-push constant 1
-add
 call Utils.random 1
-push constant 2
-call Math.multiply 2
 pop local 2
 push local 2
 push local 4
@@ -2052,6 +2051,8 @@ add
 pop pointer 1
 push that 0
 pop local 1
+push constant 2
+pop local 3
 push local 0
 push static 5
 add

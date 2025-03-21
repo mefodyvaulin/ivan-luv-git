@@ -1,20 +1,34 @@
-function Utils.init 0
-push constant 12345
-pop static 0
-push constant 0
-return
-function Utils.random 0
-push static 0
-push constant 32767
-call Math.multiply 2
-push constant 12345
-add
-push constant 32767
-and
-pop static 0
-push static 0
-push constant 32767
-call Math.divide 2
+function Utils.random 2
+call GameFiled.getScore 0
+pop local 0
+push constant 2
+push local 0
 push argument 0
+push constant 2
+call Math.divide 2
+push constant 1
+add
+push local 0
+push argument 0
+push constant 2
+call Math.divide 2
+push constant 1
+add
+call Math.divide 2
 call Math.multiply 2
+sub
+call Math.multiply 2
+pop local 1
+push local 1
+push argument 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 1
+push constant 2
+sub
+pop local 1
+label IF_FALSE0
+push local 1
 return

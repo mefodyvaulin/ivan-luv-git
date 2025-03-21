@@ -49,6 +49,9 @@ class GameFiled
 	method int getSize() {
         return gridSize; // Доступ к полю вне класса
     }
+	function int getScore() {
+        return score;    }
+
 
 
 	function void setScore(int bonus){
@@ -436,10 +439,11 @@ class GameFiled
         }
 
         // Выбираем случайную пустую ячейку
-        let index = Utils.random(index+1) * 2;
+        let index = Utils.random(index);
         let i = emptyCells[index];
         let j = emptyCells[index + 1];
 		
+		let value = 2;
         let tempArr = tiels[i];
         let tempArr[j] = 2;
 		do GameFiled.setScore(2);

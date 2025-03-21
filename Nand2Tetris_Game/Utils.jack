@@ -1,15 +1,18 @@
 class Utils {
 
-    static int seed;
+    function int random(int max) 
+    {
+        var int score;
+        var int result;
 
-    function void init() {
-        let seed = 12345;
-        return;
-    }
+        let score = GameFiled.getScore();
+        let result = 2 * ( score - (((max / 2) + 1) * (score / ((max / 2) + 1))));
 
-    function int random(int max) {
-        let seed = (seed * 32767 + 12345) & 32767;
-        return (seed / 32767) * max; // Генерация случайного числа
+        if (result = max)
+        {
+            let result = result - 2;
+        }
+        return result;
     }
 
 }
