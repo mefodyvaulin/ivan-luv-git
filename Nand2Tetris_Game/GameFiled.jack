@@ -8,8 +8,7 @@ class GameFiled
 	static int y2;
     field int gridSize; // счетчик, размер сетки
 	static Array tiels; // двумерный массив
-	field int as;
-	
+
 
 	constructor GameFiled new(int count, int size) {
 		var int i, j;
@@ -493,47 +492,25 @@ class GameFiled
 		return;
 
 	}
-
-	method void addRandomTile() {
-        var int emptyCount, i, j, index, value;
+	method void addRandomTile() 
+	{
+        var int i, j, index, value;
         var Array emptyCells;
         var Array tempArr;
 
         // Подсчет пустых ячеек
-        let emptyCount = 0;
+		let emptyCells = Array.new(72);
         let i = 0;
+		let index = 0;
+
         while (i < gridSize) {
             let tempArr = tiels[i];
             let j = 0;
             while (j < gridSize) {
                 if (tempArr[j] = 0) {
-                    let emptyCount = emptyCount + 1;
-                }
-                let j = j + 1;
-            }
-            let i = i + 1;
-        }
-
-        // Если нет пустых ячеек, выходим
-        if (emptyCount = 0) {
-            return;
-        }
-
-        // Создаем массив для хранения координат пустых ячеек
-        let emptyCells = Array.new(emptyCount * 2);
-        let i = 0;
-        let j = 0;
-        let index = 0;
-
-        // Заполняем массив координатами пустых ячеек
-        while (i < gridSize) {
-            let tempArr = tiels[i];
-            let j = 0;
-            while (j < gridSize) {
-                if (tempArr[j] = 0) {
-                    let emptyCells[index] = i; // строка
-                    let emptyCells[index + 1] = j; // столбец
-                    let index = index + 2;
+                    let emptyCells[index] = i;
+					let emptyCells[index+1] = j;
+					let index = index + 2;
                 }
                 let j = j + 1;
             }
@@ -541,20 +518,18 @@ class GameFiled
         }
 
         // Выбираем случайную пустую ячейку
-        let index = Utils.random(emptyCount) * 2;
+        let index = Utils.random(index+1) * 2;
         let i = emptyCells[index];
         let j = emptyCells[index + 1];
-
-        // Генерируем новое число (2 или 4)
-        let value = Utils.random(2) * 2 + 2;
-
-        // Устанавливаем новое значение в ячейку
+		
         let tempArr = tiels[i];
-        let tempArr[j] = value;
-		do GameFiled.setScore(value);
+        let tempArr[j] = 2;
+		do GameFiled.setScore(2);
 
         // Отрисовываем новую плитку
-        do DrawerNum.drawNum(value, x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+        do DrawerNum.drawNum(2, x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+
+		do emptyCells.dispose();
 		return;
     }
 
