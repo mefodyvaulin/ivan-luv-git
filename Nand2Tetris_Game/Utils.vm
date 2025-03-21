@@ -32,3 +32,28 @@ pop local 1
 label IF_FALSE0
 push local 1
 return
+function Utils.random2_4 2
+call GameFiled.getScore 0
+push argument 0
+add
+pop local 0
+push local 0
+push constant 8
+push local 0
+push constant 8
+call Math.divide 2
+call Math.multiply 2
+sub
+pop local 1
+push local 1
+push constant 4
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 2
+pop local 1
+label IF_FALSE0
+push local 1
+return

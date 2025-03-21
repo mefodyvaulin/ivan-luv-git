@@ -6,6 +6,7 @@ class GameFiled
 	static int y1;
 	static int x2;
 	static int y2;
+	static String scoreString;
     field int gridSize; // счетчик, размер сетки
 	static Array tiels; // двумерный массив
 
@@ -15,7 +16,7 @@ class GameFiled
 		var Array tempArr;
 		let score = count;
 		let gridSize = size;
-		
+		let scoreString = "Score:";
 		let x1 = 136;
 		let y1 = 8;
 		let x2 = (136 + 240);
@@ -57,12 +58,14 @@ class GameFiled
 	function void setScore(int bonus){
 		let score = score + bonus;
 		do Output.moveCursor(1, 1);
-		do Output.printString("Score:");
+		do Output.printString(scoreString);
 		do Output.printInt(score);
 		return;
 	}
 
 	method void dispose() {
+		do tiels.dispose();
+		do scoreString.dispose();
 		do Memory.deAlloc(this);
 		return;
 	}
@@ -415,7 +418,7 @@ class GameFiled
 	
 	method void addRandomTile() 
 	{
-        var int i, j, index, value;
+        var int i, j, index, value, emptyCount;
         var Array emptyCells;
         var Array tempArr;
 
@@ -429,6 +432,7 @@ class GameFiled
             let j = 0;
             while (j < gridSize) {
                 if (tempArr[j] = 0) {
+					let emptyCount = emptyCount + 1;
                     let emptyCells[index] = i;
 					let emptyCells[index+1] = j;
 					let index = index + 2;
@@ -443,13 +447,13 @@ class GameFiled
         let i = emptyCells[index];
         let j = emptyCells[index + 1];
 		
-		let value = 2;
+		let value = Utils.random2_4(emptyCount);
         let tempArr = tiels[i];
-        let tempArr[j] = 2;
-		do GameFiled.setScore(2);
+        let tempArr[j] = value;
+		do GameFiled.setScore(value);
 
         // Отрисовываем новую плитку
-        do DrawerNum.drawNum(2, x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+        do DrawerNum.drawNum(value, x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 
 		do emptyCells.dispose();
 		return;

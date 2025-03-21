@@ -6,6 +6,21 @@ push argument 0
 pop static 0
 push argument 1
 pop this 0
+push constant 6
+call String.new 1
+push constant 83
+call String.appendChar 2
+push constant 99
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+pop static 5
 push constant 136
 pop static 1
 push constant 8
@@ -20,7 +35,7 @@ add
 pop static 4
 push argument 1
 call Array.new 1
-pop static 5
+pop static 6
 push constant 0
 pop local 0
 push constant 0
@@ -32,7 +47,7 @@ lt
 not
 if-goto WHILE_END0
 push local 0
-push static 5
+push static 6
 add
 push argument 1
 call Array.new 1
@@ -47,7 +62,7 @@ lt
 not
 if-goto WHILE_END1
 push local 0
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -103,20 +118,7 @@ push constant 1
 push constant 1
 call Output.moveCursor 2
 pop temp 0
-push constant 6
-call String.new 1
-push constant 83
-call String.appendChar 2
-push constant 99
-call String.appendChar 2
-push constant 111
-call String.appendChar 2
-push constant 114
-call String.appendChar 2
-push constant 101
-call String.appendChar 2
-push constant 58
-call String.appendChar 2
+push static 5
 call Output.printString 1
 pop temp 0
 push static 0
@@ -127,6 +129,12 @@ return
 function GameFiled.dispose 0
 push argument 0
 pop pointer 0
+push static 6
+call Array.dispose 1
+pop temp 0
+push static 5
+call String.dispose 1
+pop temp 0
 push pointer 0
 call Memory.deAlloc 1
 pop temp 0
@@ -198,7 +206,7 @@ pop local 2
 goto WHILE_EXP1
 label WHILE_END1
 push constant 0
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -273,7 +281,7 @@ push constant 2
 call GameFiled.setScore 1
 pop temp 0
 push constant 1
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -446,7 +454,7 @@ lt
 not
 if-goto WHILE_END1
 push local 3
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -830,7 +838,7 @@ lt
 not
 if-goto WHILE_END1
 push local 3
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -1222,7 +1230,7 @@ lt
 not
 if-goto WHILE_END2
 push local 5
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -1230,7 +1238,7 @@ pop local 0
 push local 5
 push constant 1
 add
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -1607,7 +1615,7 @@ gt
 not
 if-goto WHILE_END2
 push local 5
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -1615,7 +1623,7 @@ pop local 0
 push local 5
 push constant 1
 sub
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -1959,12 +1967,12 @@ call Array.dispose 1
 pop temp 0
 push constant 0
 return
-function GameFiled.addRandomTile 6
+function GameFiled.addRandomTile 7
 push argument 0
 pop pointer 0
 push constant 72
 call Array.new 1
-pop local 4
+pop local 5
 push constant 0
 pop local 0
 push constant 0
@@ -1976,11 +1984,11 @@ lt
 not
 if-goto WHILE_END0
 push local 0
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
-pop local 5
+pop local 6
 push constant 0
 pop local 1
 label WHILE_EXP1
@@ -1990,7 +1998,7 @@ lt
 not
 if-goto WHILE_END1
 push local 1
-push local 5
+push local 6
 add
 pop pointer 1
 push that 0
@@ -1999,8 +2007,12 @@ eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push local 2
 push local 4
+push constant 1
+add
+pop local 4
+push local 2
+push local 5
 add
 push local 0
 pop temp 0
@@ -2010,7 +2022,7 @@ pop that 0
 push local 2
 push constant 1
 add
-push local 4
+push local 5
 add
 push local 1
 pop temp 0
@@ -2038,7 +2050,7 @@ push local 2
 call Utils.random 1
 pop local 2
 push local 2
-push local 4
+push local 5
 add
 pop pointer 1
 push that 0
@@ -2046,31 +2058,32 @@ pop local 0
 push local 2
 push constant 1
 add
-push local 4
+push local 5
 add
 pop pointer 1
 push that 0
 pop local 1
-push constant 2
+push local 4
+call Utils.random2_4 1
 pop local 3
 push local 0
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
-pop local 5
+pop local 6
 push local 1
-push local 5
+push local 6
 add
-push constant 2
+push local 3
 pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
-push constant 2
+push local 3
 call GameFiled.setScore 1
 pop temp 0
-push constant 2
+push local 3
 push static 1
 push static 3
 push static 1
@@ -2096,7 +2109,7 @@ add
 push this 0
 call DrawerNum.drawNum 4
 pop temp 0
-push local 4
+push local 5
 call Array.dispose 1
 pop temp 0
 push constant 0
@@ -2115,7 +2128,7 @@ lt
 not
 if-goto WHILE_END0
 push local 0
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -2164,7 +2177,7 @@ lt
 not
 if-goto WHILE_END2
 push local 0
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -2229,7 +2242,7 @@ lt
 not
 if-goto WHILE_END5
 push local 0
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0
@@ -2237,7 +2250,7 @@ pop local 2
 push local 0
 push constant 1
 add
-push static 5
+push static 6
 add
 pop pointer 1
 push that 0

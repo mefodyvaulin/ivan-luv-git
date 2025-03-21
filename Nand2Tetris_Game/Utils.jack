@@ -15,4 +15,20 @@ class Utils {
         return result;
     }
 
+    function int random2_4(int count)
+    {
+        var int score;
+        var int result;
+
+        let score = GameFiled.getScore() + count;
+        let result = (score - (8 * (score / 8)));
+
+        if (~(result = 4))
+        {
+            let result = 2;
+        }
+
+        return result;
+    }
+
 }
