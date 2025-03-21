@@ -9,6 +9,7 @@ class GameFiled
 	static String scoreString;
     field int gridSize; // счетчик, размер сетки
 	static Array tiels; // двумерный массив
+	static Array boolArr;
 
 
 	constructor GameFiled new(int count, int size) {
@@ -31,6 +32,22 @@ class GameFiled
 			while (j < size){
 				let tempArr = tiels[i];
 				let tempArr[j] = 0;
+				let j = j + 1;
+			}
+			let j = 0;
+			let i = i + 1;
+		}
+
+		let boolArr = Array.new(size);
+		let i = 0;
+		let j = 0;
+		while (i < size)
+		{
+			let boolArr[i] = Array.new(size);
+			while (j < size)
+			{
+				let tempArr = boolArr[i];
+				let tempArr[j] = true;
 				let j = j + 1;
 			}
 			let j = 0;
@@ -141,39 +158,29 @@ class GameFiled
 		return;
 	}
 
-	function Array FillArray(int gridSize)
-	{	
-		var int i, j;
-		var Array fillArray, tempArr;
-
-		let fillArray = Array.new(gridSize);
-		let i = 0;
-		let j = 0;
-		while (i < gridSize)
-		{
-			let fillArray[i] = Array.new(gridSize);
-			while (j < gridSize)
-			{
-				let tempArr = fillArray[i];
-				let tempArr[j] = true;
-				let j = j + 1;
-			}
-			let j = 0;
-			let i = i + 1;
-		}
-		return fillArray;
-	}
 	
-	method void moveRight(){
-		var Array tempArr, boolArr, boolArrh;
+	method void moveRight()
+	{
+		var Array tempArr, boolArrh;
 		var int i, j, p;
 		var bool addNewTile;
 		
 		let addNewTile = false;
 
 		// массив для проверки того, было ли слияние в ячейке
-		let boolArr = GameFiled.FillArray(gridSize);
-
+		let i = 0;
+		let j = 0;
+		while (i < gridSize)
+		{
+			let boolArrh = boolArr[i];
+			while (j < gridSize)
+			{
+				let boolArrh[j] = true;
+				let j = j + 1;
+			}
+			let j = 0;
+			let i = i + 1;
+		}
 		let p = gridSize - 1;
 		while(p > 0)
 		{
@@ -222,17 +229,25 @@ class GameFiled
 			do addRandomTile();
 		}
 		
-		do boolArrh.dispose();
-		do boolArr.dispose();
 		return;
 	}
 
 	method void moveLeft(){
-		var Array tempArr, boolArr, boolArrh;
+		var Array tempArr, boolArrh;
 		var int i, j, p;
 		var bool addNewTile;
 
-		let boolArr = GameFiled.FillArray(gridSize);
+		while (i < gridSize)
+		{
+			let boolArrh = boolArr[i];
+			while (j < gridSize)
+			{
+				let boolArrh[j] = true;
+				let j = j + 1;
+			}
+			let j = 0;
+			let i = i + 1;
+		}
 		let p = gridSize - 1;
 
 		while(p > 0)
@@ -282,17 +297,25 @@ class GameFiled
 			do addRandomTile();
 		}
 
-		do boolArrh.dispose();
-		do boolArr.dispose();
 		return;
 	}
 
 	method void moveUp(){
-		var Array tempArr, tempArr1, boolArr, boolArrh, boolArrh1;
+		var Array tempArr, tempArr1, boolArrh, boolArrh1;
 		var int i, j, p;
 		var bool addNewTile;
 
-		let boolArr = GameFiled.FillArray(gridSize);
+		while (i < gridSize)
+		{
+			let boolArrh = boolArr[i];
+			while (j < gridSize)
+			{
+				let boolArrh[j] = true;
+				let j = j + 1;
+			}
+			let j = 0;
+			let i = i + 1;
+		}
 		let p = gridSize - 1;
 
 		
@@ -344,9 +367,7 @@ class GameFiled
 		if (addNewTile){
 			do addRandomTile();
 		}
-		do boolArrh1.dispose();
-		do boolArrh.dispose();
-		do boolArr.dispose();
+
 		return;
 	}
 
@@ -354,11 +375,22 @@ class GameFiled
 
 	method void moveDown()
 	{
-		var Array tempArr, tempArr1, boolArr, boolArrh, boolArrh1;
+		var Array tempArr, tempArr1, boolArrh, boolArrh1;
 		var int i, j, p;
 		var bool addNewTile;
 
-		let boolArr = GameFiled.FillArray(gridSize);
+		while (i < gridSize)
+		{
+			let boolArrh = boolArr[i];
+			while (j < gridSize)
+			{
+				let boolArrh[j] = true;
+				let j = j + 1;
+			}
+			let j = 0;
+			let i = i + 1;
+		}
+
 		let p = gridSize - 1;
 
 		while(p > 0)
@@ -409,9 +441,7 @@ class GameFiled
 		if (addNewTile){
 			do addRandomTile();
 		}
-		do boolArrh1.dispose();
-		do boolArrh.dispose();
-		do boolArr.dispose();
+
 		return;
 	}
 
@@ -423,7 +453,7 @@ class GameFiled
         var Array tempArr;
 
         // Подсчет пустых ячеек
-		let emptyCells = Array.new(72);
+		let emptyCells = Array.new(50);
         let i = 0;
 		let index = 0;
 
