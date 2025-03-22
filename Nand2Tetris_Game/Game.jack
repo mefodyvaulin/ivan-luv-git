@@ -21,11 +21,11 @@ class Game{
         1 - сменить игровой режим на 3 на 3
         2 - сменить игровой режим на 4 на 4
         3 - сменить игровой режим на 5 на 5
-        4 - выйти из игры (пока только стиарет поле, но из игры не выходит)
-        W - вверх
-        S - вниз
-        A - влево
-        D - вправо
+        4 - выйти из игры
+        W or Up - вверх
+        S or Down - вниз
+        A or Left - влево
+        D or Right - вправо
         */
 	method void run() 
     {
@@ -76,9 +76,9 @@ class Game{
                     do SetBestScore();
 				}  
 
-                if (key = 68)
+                if ((key = 68) | (key = 132))
                 {
-                    do gameFiled.moveRight(); // press D
+                    do gameFiled.moveRight(); // press D or Right
                     let score = gameFiled.getScore();
                     let win = gameFiled.getWin();
                     if (score > bestScore){
@@ -87,9 +87,9 @@ class Game{
                     }
                 }
 
-                if (key = 65)
+                if ((key = 65) | (key = 130))
                 {
-                    do gameFiled.moveLeft(); // press A
+                    do gameFiled.moveLeft(); // press A or Left
                     let score = gameFiled.getScore();
                     let win = gameFiled.getWin();
                     if (score > bestScore){
@@ -98,9 +98,9 @@ class Game{
                     }
                 }
 
-                if (key = 87)
+                if ((key = 87) | (key = 131))
                 {
-                    do gameFiled.moveUp(); // press W
+                    do gameFiled.moveUp(); // press W or Up
                     let score = gameFiled.getScore();
                     let win = gameFiled.getWin();
                     if (score > bestScore){
@@ -109,9 +109,9 @@ class Game{
                     }
                 }
 
-                if (key = 83)
+                if ((key = 83) | (key = 133))
                 {
-                    do gameFiled.moveDown(); // press S
+                    do gameFiled.moveDown(); // press S  or Down
                     let score = gameFiled.getScore();
                     let win = gameFiled.getWin();
                     if (score > bestScore){
@@ -149,7 +149,7 @@ class Game{
 					    let key = Keyboard.keyPressed(); 
 				    }
                     do Screen.clearScreen();
-                    let gameFiled = GameFiled.new(0, size);
+                    let gameFiled = GameFiled.new(size);
                 }
 
 				// waits for the key to be released

@@ -1,6 +1,7 @@
-class Utils {
+class Random {
 
-    function int random(int max) 
+    //Генерирует четное число в диопазоне [0;max)
+    function int randomEven(int max) 
     {
         var int score;
         var int result;
@@ -15,7 +16,8 @@ class Utils {
         return result;
     }
 
-    function int random2_4(int count)
+    // Генерирует число 2 или 4
+    function int randomTwoOrFour(int count)
     {
         var int score;
         var int result;

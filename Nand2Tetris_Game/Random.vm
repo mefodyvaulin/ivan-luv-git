@@ -1,4 +1,4 @@
-function Utils.random 2
+function Random.randomEven 2
 call GameFiled.getScore 0
 pop local 0
 push constant 2
@@ -32,7 +32,7 @@ pop local 1
 label IF_FALSE0
 push local 1
 return
-function Utils.random2_4 2
+function Random.randomTwoOrFour 2
 call GameFiled.getScore 0
 push argument 0
 add

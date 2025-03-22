@@ -282,6 +282,10 @@ label IF_FALSE3
 push local 0
 push constant 68
 eq
+push local 0
+push constant 132
+eq
+or
 if-goto IF_TRUE4
 goto IF_FALSE4
 label IF_TRUE4
@@ -310,6 +314,10 @@ label IF_FALSE4
 push local 0
 push constant 65
 eq
+push local 0
+push constant 130
+eq
+or
 if-goto IF_TRUE6
 goto IF_FALSE6
 label IF_TRUE6
@@ -338,6 +346,10 @@ label IF_FALSE6
 push local 0
 push constant 87
 eq
+push local 0
+push constant 131
+eq
+or
 if-goto IF_TRUE8
 goto IF_FALSE8
 label IF_TRUE8
@@ -366,6 +378,10 @@ label IF_FALSE8
 push local 0
 push constant 83
 eq
+push local 0
+push constant 133
+eq
+or
 if-goto IF_TRUE10
 goto IF_FALSE10
 label IF_TRUE10
@@ -460,9 +476,8 @@ goto WHILE_EXP2
 label WHILE_END2
 call Screen.clearScreen 0
 pop temp 0
-push constant 0
 push local 1
-call GameFiled.new 2
+call GameFiled.new 1
 pop this 0
 label IF_FALSE12
 label WHILE_EXP3

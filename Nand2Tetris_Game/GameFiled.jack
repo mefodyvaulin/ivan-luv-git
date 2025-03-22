@@ -70,7 +70,6 @@ class GameFiled
 	{
 		do tiels.dispose();
 		do scoreString.dispose();
-		do boolArr.dispose();
 		do Memory.deAlloc(this);
 		return;
 	}
@@ -463,12 +462,12 @@ class GameFiled
         }
 
         // Выбираем случайную пустую ячейку
-        let index = Utils.random(index);
+        let index = Random.randomEven(index);
         let i = emptyCells[index];
         let j = emptyCells[index + 1];
 		
 		// Выбираем случайное число 2 или 4
-		let value = Utils.random2_4(emptyCount);
+		let value = Random.randomTwoOrFour(emptyCount);
         let tempArr = tiels[i];
         let tempArr[j] = value;
 		do GameFiled.setScore(value);
