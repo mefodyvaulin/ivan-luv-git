@@ -22,7 +22,8 @@ class Game{
         var bool exit;
 
         let exit = false;
-		while (~exit) {
+		while (~exit) 
+        {
 			// typical handling of "keyboard events" in interactive Jack apps
 			// waits for a key to be pressed
 			while (key = 0) {
@@ -34,17 +35,20 @@ class Game{
                     do gameFiled.dispose();
                     let gameFiled = GameFiled.new(0,3); // press 1
 				} 
+                
 				if ((key = 50) & (~(size = 4))) { 
                     do Screen.clearScreen();
                     do gameFiled.dispose();
                     let gameFiled = GameFiled.new(0,4); // press 2
-				} 
+				}
+
 				if ((key = 51) & (~(size = 5))) { 
  
                     do Screen.clearScreen();
                     do gameFiled.dispose();
                     let gameFiled = GameFiled.new(0,5); // press 3
 				}
+
                 if ((key = 52)& (~(size = 2))) { 
                     do Screen.clearScreen();
                     do gameFiled.dispose();
@@ -58,27 +62,29 @@ class Game{
 
                 if (key = 65)
                 {
-                    do gameFiled.moveLeft();// press A
+                    do gameFiled.moveLeft(); // press A
                 }
 
                 if (key = 87)
                 {
-                    do gameFiled.moveUp();// press W
+                    do gameFiled.moveUp(); // press W
                 }
 
                 if (key = 83)
                 {
-                    do gameFiled.moveDown();// press S
+                    do gameFiled.moveDown(); // press S
                 }
 				
                 // Проверка конца
-                if (gameFiled.isGameOver()) {
+                if (gameFiled.isGameOver()) 
+                {
                     do Output.printString("Game Over!");
                     let exit = true;  // Закрываем игру
                 }
 
 				// waits for the key to be released
-				while (~(key = 0)) {
+				while (~(key = 0))
+                {
 					let key = Keyboard.keyPressed(); 
 				}
 			} 

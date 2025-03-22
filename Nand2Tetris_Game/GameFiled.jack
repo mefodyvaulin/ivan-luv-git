@@ -23,7 +23,7 @@ class GameFiled
 		let x2 = (136 + 240);
 		let y2 = (8 + 240);
 
-		//инициализируется двумерный массив соответствующий игровому полю
+		//инициализируется двумерный массив int-ов соответствующий игровому полю
 		let tiels = Array.new(size);
 		let i = 0;
 		let j = 0;
@@ -38,6 +38,7 @@ class GameFiled
 			let i = i + 1;
 		}
 
+		//инициализируется двумерный массив bool-ов соответствующий игровому полю
 		let boolArr = Array.new(size);
 		let i = 0;
 		let j = 0;
@@ -64,26 +65,29 @@ class GameFiled
 		return this;
 	}
 
-	method int getSize() {
+	method void dispose() 
+	{
+		do tiels.dispose();
+		do scoreString.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	method int getSize()
+	{
         return gridSize; // Доступ к полю вне класса
     }
-	function int getScore() {
-        return score;    }
 
-
+	function int getScore() 
+	{
+        return score;
+	}
 
 	function void setScore(int bonus){
 		let score = score + bonus;
 		do Output.moveCursor(1, 1);
 		do Output.printString(scoreString);
 		do Output.printInt(score);
-		return;
-	}
-
-	method void dispose() {
-		do tiels.dispose();
-		do scoreString.dispose();
-		do Memory.deAlloc(this);
 		return;
 	}
 
@@ -109,7 +113,6 @@ class GameFiled
 			do Screen.drawLine(x1, y1 + (j * tileSize), x2, y1 + (j * tileSize)); 
 			let j = j + 1;
 		}
-
 		
 		//начальные ячейки
 		
@@ -119,7 +122,7 @@ class GameFiled
 		let tempArr[0] = 2;
 		do GameFiled.setScore(2);
 
-		do DrawerNum.drawNum(2, (x1 + 5)+ tileSize, (y1 + 5 ), gridSiz);
+		do DrawerNum.drawNum(2, (x1 + 5)+ tileSize, (y1 + 5), gridSiz);
 		let tempArr[1] = 2;
 		do GameFiled.setScore(2);
 
@@ -181,6 +184,7 @@ class GameFiled
 			let j = 0;
 			let i = i + 1;
 		}
+
 		let p = gridSize - 1;
 		while(p > 0)
 		{
@@ -232,7 +236,8 @@ class GameFiled
 		return;
 	}
 
-	method void moveLeft(){
+	method void moveLeft()
+	{
 		var Array tempArr, boolArrh;
 		var int i, j, p;
 		var bool addNewTile;
@@ -248,8 +253,8 @@ class GameFiled
 			let j = 0;
 			let i = i + 1;
 		}
-		let p = gridSize - 1;
 
+		let p = gridSize - 1;
 		while(p > 0)
 		{
 			let i = 0;
@@ -293,7 +298,8 @@ class GameFiled
 			let p = p - 1;
 		}
 		
-		if (addNewTile){
+		if (addNewTile)
+		{
 			do addRandomTile();
 		}
 
@@ -371,8 +377,6 @@ class GameFiled
 		return;
 	}
 
-	
-
 	method void moveDown()
 	{
 		var Array tempArr, tempArr1, boolArrh, boolArrh1;
@@ -429,7 +433,6 @@ class GameFiled
 						do Screen.setColor(true);
 						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 					}
-
 					let i = i - 1;
 				}
 				let i = gridSize - 1;
@@ -438,14 +441,14 @@ class GameFiled
 			let p = p - 1;
 		}
 
-		if (addNewTile){
+		if (addNewTile)
+		{
 			do addRandomTile();
 		}
 
 		return;
 	}
 
-	
 	method void addRandomTile() 
 	{
         var int i, j, index, value, emptyCount;
@@ -477,6 +480,7 @@ class GameFiled
         let i = emptyCells[index];
         let j = emptyCells[index + 1];
 		
+		// Выбираем случайное число 2 или 4
 		let value = Utils.random2_4(emptyCount);
         let tempArr = tiels[i];
         let tempArr[j] = value;
@@ -489,7 +493,8 @@ class GameFiled
 		return;
     }
 
-	method bool isGameOver() {
+	method bool isGameOver() 
+	{
 		var int i, j;
 		var Array tempArr, tempArr1;
 
