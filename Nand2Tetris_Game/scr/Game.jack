@@ -3,7 +3,6 @@ class Game{
     field int bestScore;
     field String gameOver, pressAnyButton, forPlayAgain, youLose, youWin, bestScoreStr;
 
-
     constructor Game new(GameFiled gameF){
         let gameFiled = gameF;
         let bestScore = 0;

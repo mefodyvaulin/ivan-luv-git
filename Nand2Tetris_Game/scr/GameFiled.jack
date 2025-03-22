@@ -74,11 +74,6 @@ class GameFiled
 		return;
 	}
 
-	function int getScore() 
-	{
-        return score;
-	}
-
 	method int getWin() 
 	{
         return win;
@@ -88,6 +83,11 @@ class GameFiled
 	{
         return gridSize; // Доступ к полю вне класса
     }
+
+	function int getScore() 
+	{
+        return score;
+	}
 
 	function void setScore(int bonus){
 		let score = score + bonus;
@@ -119,9 +119,8 @@ class GameFiled
 			do Screen.drawLine(x1, y1 + (j * tileSize), x2, y1 + (j * tileSize)); 
 			let j = j + 1;
 		}
-		
+
 		//начальные ячейки
-		
 		let tempArr = tiels[0];
 
 		do DrawerNum.drawNum(4, (x1 + 5), (y1 + 5), gridSiz);
