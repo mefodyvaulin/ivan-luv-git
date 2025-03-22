@@ -155,7 +155,7 @@ call GameFiled.isGameOver 1
 if-goto IF_TRUE8
 goto IF_FALSE8
 label IF_TRUE8
-push constant 2
+push constant 10
 push constant 1
 call Output.moveCursor 2
 pop temp 0
@@ -183,11 +183,11 @@ push constant 33
 call String.appendChar 2
 call Output.printString 1
 pop temp 0
-push constant 3
+push constant 11
 push constant 1
 call Output.moveCursor 2
 pop temp 0
-push constant 31
+push constant 16
 call String.new 1
 push constant 80
 call String.appendChar 2
@@ -221,8 +221,14 @@ push constant 111
 call String.appendChar 2
 push constant 109
 call String.appendChar 2
-push constant 32
-call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 12
+push constant 1
+call Output.moveCursor 2
+pop temp 0
+push constant 14
+call String.new 1
 push constant 102
 call String.appendChar 2
 push constant 111
@@ -256,34 +262,28 @@ pop temp 0
 push this 0
 call GameFiled.dispose 1
 pop temp 0
-call Screen.clearScreen 0
+push constant 2000
+call Sys.wait 1
 pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
 label WHILE_EXP2
 push local 0
 push constant 0
 eq
-not
 not
 if-goto WHILE_END2
 call Keyboard.keyPressed 0
 pop local 0
 goto WHILE_EXP2
 label WHILE_END2
+call Screen.clearScreen 0
+pop temp 0
 push constant 0
 push local 1
 call GameFiled.new 2
 pop this 0
 label IF_FALSE8
-push local 0
-push constant 81
-eq
-if-goto IF_TRUE9
-goto IF_FALSE9
-label IF_TRUE9
-push constant 0
-not
-pop local 2
-label IF_FALSE9
 label WHILE_EXP3
 push local 0
 push constant 0

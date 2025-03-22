@@ -78,8 +78,23 @@ class Game{
                 // Проверка конца
                 if (gameFiled.isGameOver()) 
                 {
+                    do Output.moveCursor(10,1);
                     do Output.printString("Game Over!");
-                    let exit = true;  // Закрываем игру
+                    do Output.moveCursor(11,1);
+                    do Output.printString("Press any bottom");
+                    do Output.moveCursor(12,1);
+                    do Output.printString("for play again");
+                    
+                    do gameFiled.dispose();
+                    do Sys.wait(2000);
+                    let key = Keyboard.keyPressed(); 
+                    while ((key = 0))
+                    {
+					    let key = Keyboard.keyPressed(); 
+				    }
+			 
+                    do Screen.clearScreen();
+                    let gameFiled = GameFiled.new(0, size);
                 }
 
 				// waits for the key to be released
