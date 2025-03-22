@@ -4,7 +4,7 @@ class Main
         var GameFiled gameFiled;
         var Game game;
 
-        let gameFiled = GameFiled.new(0, 3);
+        let gameFiled = GameFiled.new(3);
         let game = Game.new(gameFiled);
         do game.run();
         return;

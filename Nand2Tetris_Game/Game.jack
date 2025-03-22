@@ -1,8 +1,19 @@
 class Game{
     field GameFiled gameFiled;
+    field int bestScore;
+    field String gameOver, pressAnyButton, forPlayAgain, youLose, youWin, bestScoreStr;
+
 
     constructor Game new(GameFiled gameF){
         let gameFiled = gameF;
+        let bestScore = 0;
+        let gameOver = "Game Over!";
+        let pressAnyButton = "Press any button";
+        let forPlayAgain = "for play again";
+        let youLose = "You lose";
+        let youWin = "You win";
+        let bestScoreStr = "Best score:";
+        do SetBestScore();
         return this;
     }
 
@@ -16,74 +27,119 @@ class Game{
         A - влево
         D - вправо
         */
-	method void run() {
+	method void run() 
+    {
 		var char key; // the key currently pressed by the user
         var int size;
         var bool exit;
+        var int score;
+        var bool win;
 
         let exit = false;
-		while (~exit) 
+        let win = false;
+		while (~exit)
         {
 			// typical handling of "keyboard events" in interactive Jack apps
 			// waits for a key to be pressed
-			while (key = 0) {
+			while (key = 0) 
+            {
 				let key = Keyboard.keyPressed(); 
                 let size = gameFiled.getSize();
+                let win = gameFiled.getWin();
 
 				if ((key = 49) & (~(size = 3))) {
                     do Screen.clearScreen();
                     do gameFiled.dispose();
-                    let gameFiled = GameFiled.new(0,3); // press 1
+                    let gameFiled = GameFiled.new(3); // press 1
+                    do SetBestScore();
 				} 
                 
 				if ((key = 50) & (~(size = 4))) { 
                     do Screen.clearScreen();
                     do gameFiled.dispose();
-                    let gameFiled = GameFiled.new(0,4); // press 2
+                    let gameFiled = GameFiled.new(4); // press 2
+                    do SetBestScore();
 				}
 
 				if ((key = 51) & (~(size = 5))) { 
  
                     do Screen.clearScreen();
                     do gameFiled.dispose();
-                    let gameFiled = GameFiled.new(0,5); // press 3
+                    let gameFiled = GameFiled.new(5); // press 3
+                    do SetBestScore();
 				}
 
-                if ((key = 52)& (~(size = 2))) { 
+                if ((key = 52) & (~(size = 2))) { 
                     do Screen.clearScreen();
                     do gameFiled.dispose();
                     let exit = true; // press 4
+                    do SetBestScore();
 				}  
 
                 if (key = 68)
                 {
                     do gameFiled.moveRight(); // press D
+                    let score = gameFiled.getScore();
+                    let win = gameFiled.getWin();
+                    if (score > bestScore){
+                        let bestScore = score;
+                        do SetBestScore();
+                    }
                 }
 
                 if (key = 65)
                 {
                     do gameFiled.moveLeft(); // press A
+                    let score = gameFiled.getScore();
+                    let win = gameFiled.getWin();
+                    if (score > bestScore){
+                        let bestScore = score;
+                        do SetBestScore();
+                    }
                 }
 
                 if (key = 87)
                 {
                     do gameFiled.moveUp(); // press W
+                    let score = gameFiled.getScore();
+                    let win = gameFiled.getWin();
+                    if (score > bestScore){
+                        let bestScore = score;
+                        do SetBestScore();
+                    }
                 }
 
                 if (key = 83)
                 {
                     do gameFiled.moveDown(); // press S
+                    let score = gameFiled.getScore();
+                    let win = gameFiled.getWin();
+                    if (score > bestScore){
+                        let bestScore = score;
+                        do SetBestScore();
+                    }
                 }
 				
                 // Проверка конца
-                if (gameFiled.isGameOver()) 
+                if ((gameFiled.isGameOver()) | win) 
                 {
-                    do Output.moveCursor(10,1);
-                    do Output.printString("Game Over!");
-                    do Output.moveCursor(11,1);
-                    do Output.printString("Press any bottom");
-                    do Output.moveCursor(12,1);
-                    do Output.printString("for play again");
+                    if (win)
+                    {
+                        do Output.moveCursor(10,28);
+                        do Output.printString(youWin);
+                    }
+
+                    else
+                    {
+                        do Output.moveCursor(10,28);
+                        do Output.printString(youLose);
+                    }
+                    do Output.moveCursor(11,27);
+                    do Output.printString(gameOver);
+                    do Output.moveCursor(12,25);
+                    do Output.printString(pressAnyButton);
+                    do Output.moveCursor(13,25);
+                    do Output.printString(forPlayAgain);
                     
                     do gameFiled.dispose();
                     do Sys.wait(2000);
@@ -92,18 +148,25 @@ class Game{
                     {
 					    let key = Keyboard.keyPressed(); 
 				    }
-			 
                     do Screen.clearScreen();
                     let gameFiled = GameFiled.new(0, size);
                 }
 
 				// waits for the key to be released
-				while (~(key = 0))
+				while ((~(key = 0)) & (~(exit)))
                 {
 					let key = Keyboard.keyPressed(); 
 				}
 			} 
             return;
         }
+    }
+
+    method void SetBestScore()
+    {
+        do Output.moveCursor(1,48);
+        do Output.printString(bestScoreStr);
+        do Output.printInt(bestScore);
+        return;
     }
 }

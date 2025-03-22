@@ -2,21 +2,22 @@ class GameFiled
 {
 
 	static int score;
-	static int x1;
+	static int x1; //координаты начала поля 
 	static int y1;
-	static int x2;
+	static int x2;//конца
 	static int y2;
 	static String scoreString;
-    field int gridSize; // счетчик, размер сетки
-	static Array tiels; // двумерный массив
 	static Array boolArr;
+	static Array tiels; // двумерный массив
+	field int gridSize; // счетчик, размер сетки
+	field bool win;
 
-
-	constructor GameFiled new(int count, int size) {
+	constructor GameFiled new(int size) {
 		var int i, j;
 		var Array tempArr;
-		let score = count;
+		let score = 0;
 		let gridSize = size;
+		let win = false;
 		let scoreString = "Score:";
 		let x1 = 136;
 		let y1 = 8;
@@ -69,19 +70,25 @@ class GameFiled
 	{
 		do tiels.dispose();
 		do scoreString.dispose();
+		do boolArr.dispose();
 		do Memory.deAlloc(this);
 		return;
+	}
+
+	function int getScore() 
+	{
+        return score;
+	}
+
+	method int getWin() 
+	{
+        return win;
 	}
 
 	method int getSize()
 	{
         return gridSize; // Доступ к полю вне класса
     }
-
-	function int getScore() 
-	{
-        return score;
-	}
 
 	function void setScore(int bonus){
 		let score = score + bonus;
@@ -116,48 +123,16 @@ class GameFiled
 		
 		//начальные ячейки
 		
-		let tempArr = tiels[0]; //1 строка
+		let tempArr = tiels[0];
 
-		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5), gridSiz);
-		let tempArr[0] = 2;
-		do GameFiled.setScore(2);
+		do DrawerNum.drawNum(4, (x1 + 5), (y1 + 5), gridSiz);
+		let tempArr[0] = 4;
+		do GameFiled.setScore(4);
 
 		do DrawerNum.drawNum(2, (x1 + 5)+ tileSize, (y1 + 5), gridSiz);
 		let tempArr[1] = 2;
 		do GameFiled.setScore(2);
 
-		do DrawerNum.drawNum(2, (x1 + 5)+(tileSize * 2), (y1 + 5), gridSiz);
-		let tempArr[2] = 2;
-		do GameFiled.setScore(2);
-
-		let tempArr = tiels[1]; // 2 строка
-
-		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5) + tileSize, gridSiz);
-		let tempArr[0] = 2;
-		do GameFiled.setScore(2);
-
-		do DrawerNum.drawNum(2, (x1 + 5) + tileSize, (y1 + 5 + tileSize), gridSiz);
-		let tempArr[1] = 2;
-		do GameFiled.setScore(2);
-
-		do DrawerNum.drawNum(2, (x1 + 5) + (tileSize * 2), (y1 + 5 + tileSize), gridSiz);
-		let tempArr[2] = 2;
-		do GameFiled.setScore(2);
-/*
-		let tempArr = tiels[2]; // 3 строка
-
-		do DrawerNum.drawNum(2, (x1 + 5), (y1 + 5)+ (tileSize * 2), gridSiz);
-		let tempArr[0] = 2;
-		do GameFiled.setScore(2);
-
-		do DrawerNum.drawNum(2, (x1 + 5) + tileSize,  y1 + 5 + (tileSize * 2), gridSiz);
-		let tempArr[1] = 2;
-		do GameFiled.setScore(2);
-
-		do DrawerNum.drawNum(2, (x1 + 5) + (tileSize * 2), (y1 + 5 + (tileSize * 2)), gridSiz);
-		let tempArr[2] = 2;
-		do GameFiled.setScore(2);
-*/
 		return;
 	}
 
@@ -203,6 +178,9 @@ class GameFiled
 						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 						do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 						let tempArr[j] = tempArr[j] + tempArr[j-1];
+						if (tempArr[j] = 2048){
+							let win = true;
+						}
 						let addNewTile = true; // надо добавить новую ячейку
 						let boolArrh[j] = false;// больше не надо делать слияния с этой ячейкой
 						let tempArr[j-1] = 0;
@@ -272,6 +250,9 @@ class GameFiled
 						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 						do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 						let tempArr[j] = tempArr[j] + tempArr[j+1];
+						if (tempArr[j] = 2048){
+							let win = true;
+						}
 						let tempArr[j+1] = 0;
 						let addNewTile = true; // надо добавить новую ячейку
 						let boolArrh[j] = false;// больше не надо делать слияния с этой ячейкой
@@ -344,6 +325,9 @@ class GameFiled
 						do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5, gridSize);
 						let tempArr[j] = tempArr1[j] + tempArr[j];
 						let tempArr1[j] = 0;
+						if (tempArr[j] = 2048){
+							let win = true;
+						}
 						let addNewTile = true; // надо добавить новую ячейку
 						let boolArrh[j] = false; // больше не надо делать слияния с этой ячейкой
 						do Screen.setColor(true);
@@ -416,6 +400,9 @@ class GameFiled
 						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 						do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5, gridSize);
 						let tempArr[j] = tempArr1[j] + tempArr[j];
+						if (tempArr[j] = 2048){
+							let win = true;
+						}
 						let tempArr1[j] = 0;
 						let addNewTile = true; // надо добавить новую ячейку
 						let boolArrh[j] = false;// больше не надо делать слияния с этой ячейкой
@@ -501,6 +488,18 @@ class GameFiled
 		// Проверяем, есть ли пустые клетки
 		let i = 0;
 		let j = 0;
+		while (i < gridSize) {
+			let tempArr = tiels[i]; // Объявляем tempArr для каждой строки
+			while (j < gridSize) {
+				if (tempArr[j] = 0) {
+					return false;  // Есть пустая клетка, игра продолжается
+				}
+				let j = j + 1;
+			}
+			let i = i + 1;
+			let j = 0;
+		}
+
 		while (i < gridSize) {
 			let tempArr = tiels[i]; // Объявляем tempArr для каждой строки
 			while (j < gridSize) {
