@@ -1,4 +1,4 @@
-class GameFiled 
+class GameFilled 
 {
 	static int x1; //координаты начала поля 
 	static int y1;
@@ -6,12 +6,12 @@ class GameFiled
 	static int y2;
 	static String scoreString;
 	field int score;
-	field Array boolArr;
-	field Array tiels; // двумерный массив
+	field Array isFusionCells;
+	field Array cells; // двумерный массив
 	field int gridSize; // счетчик, размер сетки
 	field boolean isWin;
 
-	constructor GameFiled new(int size) 
+	constructor GameFilled new(int size) 
 	{
 		let score = 0;
 		let gridSize = size;
@@ -23,10 +23,10 @@ class GameFiled
 		let y2 = (8 + 240);
 
 		//инициализируется двумерный массив int-ов соответствующий игровому полю
-		let tiels = InitializationArrayOfArray(0);
+		let cells = InitializationArrayOfArray(0);
 
 		//инициализируется двумерный массив bool-ов соответствующий игровому полю
-		let boolArr = InitializationArrayOfArray(1);
+		let isFusionCells = InitializationArrayOfArray(1);
 
 		// рисуется игрове поле
 		do Screen.setColor(true);
@@ -43,11 +43,11 @@ class GameFiled
 		let i = 0;
 		while (i < gridSize)
 		{
-			let tempArr = tiels[i];
+			let tempArr = cells[i];
 			do tempArr.dispose();
 			let i = i + 1;
 		}
-		do tiels.dispose();
+		do cells.dispose();
 		do scoreString.dispose();
 		do Memory.deAlloc(this);
 		return;
@@ -60,7 +60,7 @@ class GameFiled
 
 	method int getSize()
 	{
-        return gridSize; // Доступ к полю вне класса
+        return gridSize;
     }
 
 	method int getScore() 
@@ -102,7 +102,7 @@ class GameFiled
 		}
 
 		//начальные ячейки
-		let tempArr = tiels[0];
+		let tempArr = cells[0];
 
 		do DrawerNum.drawNum(4, (x1 + 5), (y1 + 5), gridSize);
 		let tempArr[0] = 4;
@@ -170,7 +170,7 @@ class GameFiled
 		let addNewTile = false;
 
 		// массив для проверки того, было ли слияние в ячейке
-		do FillArrayOfArray(boolArr, true);
+		do FillArrayOfArray(isFusionCells, true);
 
 		let p = gridSize - 1;
 		while(p > 0)
@@ -180,8 +180,8 @@ class GameFiled
 
 			while (i < gridSize)
 			{
-				let tempArr = tiels[i]; 
-				let boolArrh = boolArr[i];
+				let tempArr = cells[i]; 
+				let boolArrh = isFusionCells[i];
 				while (j > 0)
 				{
 					if (tempArr[j] = tempArr[j-1] & (~(tempArr[j] = 0)) & boolArrh[j] & boolArrh[j-1])
@@ -190,7 +190,8 @@ class GameFiled
 						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 						do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 						let tempArr[j] = tempArr[j] + tempArr[j-1];
-						if (tempArr[j] = 2048){
+						if (tempArr[j] = 2048)
+						{
 							let isWin = true;
 						}
 						let addNewTile = true; // надо добавить новую ячейку
@@ -219,7 +220,8 @@ class GameFiled
 			let p = p - 1;
 		}
 		
-		if (addNewTile){
+		if (addNewTile)
+		{
 			do addRandomTile();
 		}
 		
@@ -232,7 +234,7 @@ class GameFiled
 		var int i, j, p;
 		var boolean addNewTile;
 
-		do FillArrayOfArray(boolArr, true);
+		do FillArrayOfArray(isFusionCells, true);
 
 		let p = gridSize - 1;
 		while(p > 0)
@@ -241,8 +243,8 @@ class GameFiled
 			let j = 0;
 			while (i < gridSize)
 			{
-				let tempArr = tiels[i]; 
-				let boolArrh = boolArr[i];
+				let tempArr = cells[i]; 
+				let boolArrh = isFusionCells[i];
 				while (j < (gridSize - 1))
 				{
 					if (tempArr[j] = tempArr[j+1] & (~(tempArr[j] = 0)) & boolArrh[j] & boolArrh[j+1])
@@ -294,7 +296,7 @@ class GameFiled
 		var int i, j, p;
 		var boolean addNewTile;
 
-		do FillArrayOfArray(boolArr, true);
+		do FillArrayOfArray(isFusionCells, true);
 		let p = gridSize - 1;
 
 		
@@ -306,10 +308,10 @@ class GameFiled
 			{
 				while (i < (gridSize - 1))
 				{
-					let tempArr = tiels[i];
-					let tempArr1 = tiels[i+1];
-					let boolArrh = boolArr[i];
-					let boolArrh1 = boolArr[i+1];
+					let tempArr = cells[i];
+					let tempArr1 = cells[i+1];
+					let boolArrh = isFusionCells[i];
+					let boolArrh1 = isFusionCells[i+1];
 					if (tempArr[j] = tempArr1[j] & (~(tempArr[j] = 0)) & boolArrh[j] & boolArrh1[j])
 					{
 						do Screen.setColor(false);
@@ -361,7 +363,7 @@ class GameFiled
 
 		while (i < gridSize)
 		{
-			let boolArrh = boolArr[i];
+			let boolArrh = isFusionCells[i];
 			while (j < gridSize)
 			{
 				let boolArrh[j] = true;
@@ -381,10 +383,10 @@ class GameFiled
 			{
 				while (i > 0)
 				{
-					let tempArr = tiels[i];
-					let tempArr1 = tiels[i-1];
-					let boolArrh = boolArr[i];
-					let boolArrh1 = boolArr[i-1];
+					let tempArr = cells[i];
+					let tempArr1 = cells[i-1];
+					let boolArrh = isFusionCells[i];
+					let boolArrh1 = isFusionCells[i-1];
 
 					if (tempArr[j] = tempArr1[j] & (~(tempArr[j] = 0)) & boolArrh[j] & boolArrh1[j])
 					{
@@ -440,7 +442,7 @@ class GameFiled
 		let index = 0;
 
         while (i < gridSize) {
-            let tempArr = tiels[i];
+            let tempArr = cells[i];
             let j = 0;
             while (j < gridSize) {
                 if (tempArr[j] = 0) {
@@ -461,7 +463,7 @@ class GameFiled
 		
 		// Выбираем случайное число 2 или 4
 		let value = Random.randomTwoOrFour(emptyCount, score);
-        let tempArr = tiels[i];
+        let tempArr = cells[i];
         let tempArr[j] = value;
 		do setScore(value);
 
@@ -481,7 +483,7 @@ class GameFiled
 		let i = 0;
 		let j = 0;
 		while (i < gridSize) {
-			let tempArr = tiels[i]; // Объявляем tempArr для каждой строки
+			let tempArr = cells[i]; // Объявляем tempArr для каждой строки
 			while (j < gridSize) {
 				if (tempArr[j] = 0) {
 					return false;  // Есть пустая клетка, игра продолжается
@@ -493,7 +495,7 @@ class GameFiled
 		}
 
 		while (i < gridSize) {
-			let tempArr = tiels[i]; // Объявляем tempArr для каждой строки
+			let tempArr = cells[i]; // Объявляем tempArr для каждой строки
 			while (j < gridSize) {
 				if (tempArr[j] = 0) {
 					return false;  // Есть пустая клетка, игра продолжается
@@ -508,7 +510,7 @@ class GameFiled
 		let i = 0;
 		let j = 0;
 		while (i < gridSize) {
-			let tempArr = tiels[i];  // Объявляем tempArr для каждой строки
+			let tempArr = cells[i];  // Объявляем tempArr для каждой строки
 			while (j < (gridSize - 1)) {
 				if (tempArr[j] = tempArr[j+1]) {
 					return false;  // Можно объединить плитки по горизонтали
@@ -524,8 +526,8 @@ class GameFiled
 		let j = 0;
 		while (j < gridSize) {
 			while (i < (gridSize - 1)) {
-				let tempArr = tiels[i];
-				let tempArr1 = tiels[i+1]; // Объявляем tempArr1 для соседних строк
+				let tempArr = cells[i];
+				let tempArr1 = cells[i+1]; // Объявляем tempArr1 для соседних строк
 				if (tempArr[j] = tempArr1[j]) {
 					return false;  // Можно объединить плитки по вертикали
 				}

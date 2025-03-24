@@ -114,7 +114,7 @@ call String.appendChar 2
 push constant 101
 call String.appendChar 2
 pop this 5
-push constant 7
+push constant 9
 call String.new 1
 push constant 89
 call String.appendChar 2
@@ -124,7 +124,11 @@ push constant 117
 call String.appendChar 2
 push constant 32
 call String.appendChar 2
-push constant 119
+push constant 105
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 87
 call String.appendChar 2
 push constant 105
 call String.appendChar 2
@@ -182,10 +186,10 @@ if-goto WHILE_END1
 call Keyboard.keyPressed 0
 pop local 0
 push this 0
-call GameFiled.getSize 1
+call GameFilled.getSize 1
 pop local 1
 push this 0
-call GameFiled.getWin 1
+call GameFilled.getWin 1
 pop local 4
 push local 0
 push constant 49
@@ -201,10 +205,10 @@ label IF_TRUE0
 call Screen.clearScreen 0
 pop temp 0
 push this 0
-call GameFiled.dispose 1
+call GameFilled.dispose 1
 pop temp 0
 push constant 3
-call GameFiled.new 1
+call GameFilled.new 1
 pop this 0
 push pointer 0
 call Game.SetBestScore 1
@@ -224,10 +228,10 @@ label IF_TRUE1
 call Screen.clearScreen 0
 pop temp 0
 push this 0
-call GameFiled.dispose 1
+call GameFilled.dispose 1
 pop temp 0
 push constant 4
-call GameFiled.new 1
+call GameFilled.new 1
 pop this 0
 push pointer 0
 call Game.SetBestScore 1
@@ -247,10 +251,10 @@ label IF_TRUE2
 call Screen.clearScreen 0
 pop temp 0
 push this 0
-call GameFiled.dispose 1
+call GameFilled.dispose 1
 pop temp 0
 push constant 5
-call GameFiled.new 1
+call GameFilled.new 1
 pop this 0
 push pointer 0
 call Game.SetBestScore 1
@@ -270,7 +274,7 @@ label IF_TRUE3
 call Screen.clearScreen 0
 pop temp 0
 push this 0
-call GameFiled.dispose 1
+call GameFilled.dispose 1
 pop temp 0
 push constant 0
 not
@@ -290,26 +294,14 @@ if-goto IF_TRUE4
 goto IF_FALSE4
 label IF_TRUE4
 push this 0
-call GameFiled.moveRight 1
+call GameFilled.moveRight 1
 pop temp 0
 push this 0
-call GameFiled.getScore 1
-pop local 3
-push this 0
-call GameFiled.getWin 1
+call GameFilled.getWin 1
 pop local 4
-push local 3
-push this 1
-gt
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
-push local 3
-pop this 1
 push pointer 0
 call Game.SetBestScore 1
 pop temp 0
-label IF_FALSE5
 label IF_FALSE4
 push local 0
 push constant 65
@@ -318,31 +310,19 @@ push local 0
 push constant 130
 eq
 or
-if-goto IF_TRUE6
-goto IF_FALSE6
-label IF_TRUE6
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
 push this 0
-call GameFiled.moveLeft 1
+call GameFilled.moveLeft 1
 pop temp 0
 push this 0
-call GameFiled.getScore 1
-pop local 3
-push this 0
-call GameFiled.getWin 1
+call GameFilled.getWin 1
 pop local 4
-push local 3
-push this 1
-gt
-if-goto IF_TRUE7
-goto IF_FALSE7
-label IF_TRUE7
-push local 3
-pop this 1
 push pointer 0
 call Game.SetBestScore 1
 pop temp 0
-label IF_FALSE7
-label IF_FALSE6
+label IF_FALSE5
 push local 0
 push constant 87
 eq
@@ -350,31 +330,19 @@ push local 0
 push constant 131
 eq
 or
-if-goto IF_TRUE8
-goto IF_FALSE8
-label IF_TRUE8
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
 push this 0
-call GameFiled.moveUp 1
+call GameFilled.moveUp 1
 pop temp 0
 push this 0
-call GameFiled.getScore 1
-pop local 3
-push this 0
-call GameFiled.getWin 1
+call GameFilled.getWin 1
 pop local 4
-push local 3
-push this 1
-gt
-if-goto IF_TRUE9
-goto IF_FALSE9
-label IF_TRUE9
-push local 3
-pop this 1
 push pointer 0
 call Game.SetBestScore 1
 pop temp 0
-label IF_FALSE9
-label IF_FALSE8
+label IF_FALSE6
 push local 0
 push constant 83
 eq
@@ -382,42 +350,120 @@ push local 0
 push constant 133
 eq
 or
-if-goto IF_TRUE10
-goto IF_FALSE10
-label IF_TRUE10
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
 push this 0
-call GameFiled.moveDown 1
+call GameFilled.moveDown 1
 pop temp 0
 push this 0
-call GameFiled.getScore 1
-pop local 3
-push this 0
-call GameFiled.getWin 1
+call GameFilled.getWin 1
 pop local 4
-push local 3
-push this 1
-gt
-if-goto IF_TRUE11
-goto IF_FALSE11
-label IF_TRUE11
-push local 3
-pop this 1
 push pointer 0
 call Game.SetBestScore 1
 pop temp 0
-label IF_FALSE11
-label IF_FALSE10
+label IF_FALSE7
 push this 0
-call GameFiled.isGameOver 1
+call GameFilled.isGameOver 1
 push local 4
 or
-if-goto IF_TRUE12
-goto IF_FALSE12
-label IF_TRUE12
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push pointer 0
 push local 4
-if-goto IF_TRUE13
-goto IF_FALSE13
-label IF_TRUE13
+call Game.drawGameOver 2
+pop temp 0
+push this 0
+call GameFilled.dispose 1
+pop temp 0
+push constant 2000
+call Sys.wait 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+label WHILE_EXP2
+push local 0
+push constant 0
+eq
+not
+if-goto WHILE_END2
+call Keyboard.keyPressed 0
+pop local 0
+goto WHILE_EXP2
+label WHILE_END2
+call Screen.clearScreen 0
+pop temp 0
+push local 1
+call GameFilled.new 1
+pop this 0
+label IF_FALSE8
+label WHILE_EXP3
+push local 0
+push constant 0
+eq
+not
+push local 2
+not
+and
+not
+if-goto WHILE_END3
+call Keyboard.keyPressed 0
+pop local 0
+goto WHILE_EXP3
+label WHILE_END3
+goto WHILE_EXP1
+label WHILE_END1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Game.SetBestScore 1
+push argument 0
+pop pointer 0
+push this 0
+call GameFilled.getScore 1
+pop local 0
+push local 0
+push this 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+pop this 1
+push constant 1
+push constant 48
+call Output.moveCursor 2
+pop temp 0
+push this 7
+call Output.printString 1
+pop temp 0
+push this 1
+call Output.printInt 1
+pop temp 0
+goto IF_END0
+label IF_FALSE0
+push constant 1
+push constant 48
+call Output.moveCursor 2
+pop temp 0
+push this 7
+call Output.printString 1
+pop temp 0
+push this 1
+call Output.printInt 1
+pop temp 0
+label IF_END0
+push constant 0
+return
+function Game.drawGameOver 0
+push argument 0
+pop pointer 0
+push argument 1
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push constant 10
 push constant 28
 call Output.moveCursor 2
@@ -425,8 +471,8 @@ pop temp 0
 push this 6
 call Output.printString 1
 pop temp 0
-goto IF_END13
-label IF_FALSE13
+goto IF_END0
+label IF_FALSE0
 push constant 10
 push constant 28
 call Output.moveCursor 2
@@ -434,7 +480,7 @@ pop temp 0
 push this 5
 call Output.printString 1
 pop temp 0
-label IF_END13
+label IF_END0
 push constant 11
 push constant 27
 call Output.moveCursor 2
@@ -455,63 +501,6 @@ call Output.moveCursor 2
 pop temp 0
 push this 4
 call Output.printString 1
-pop temp 0
-push this 0
-call GameFiled.dispose 1
-pop temp 0
-push constant 2000
-call Sys.wait 1
-pop temp 0
-call Keyboard.keyPressed 0
-pop local 0
-label WHILE_EXP2
-push local 0
-push constant 0
-eq
-not
-if-goto WHILE_END2
-call Keyboard.keyPressed 0
-pop local 0
-goto WHILE_EXP2
-label WHILE_END2
-call Screen.clearScreen 0
-pop temp 0
-push local 1
-call GameFiled.new 1
-pop this 0
-label IF_FALSE12
-label WHILE_EXP3
-push local 0
-push constant 0
-eq
-not
-push local 2
-not
-and
-not
-if-goto WHILE_END3
-call Keyboard.keyPressed 0
-pop local 0
-goto WHILE_EXP3
-label WHILE_END3
-goto WHILE_EXP1
-label WHILE_END1
-push constant 0
-return
-goto WHILE_EXP0
-label WHILE_END0
-function Game.SetBestScore 0
-push argument 0
-pop pointer 0
-push constant 1
-push constant 48
-call Output.moveCursor 2
-pop temp 0
-push this 7
-call Output.printString 1
-pop temp 0
-push this 1
-call Output.printInt 1
 pop temp 0
 push constant 0
 return

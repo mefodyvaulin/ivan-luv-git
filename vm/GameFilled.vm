@@ -1,4 +1,4 @@
-function GameFiled.new 0
+function GameFilled.new 0
 push constant 5
 call Memory.alloc 1
 pop pointer 0
@@ -37,26 +37,22 @@ add
 pop static 3
 push pointer 0
 push constant 0
-call GameFiled.InitializationArrayOfArray 2
+call GameFilled.InitializationArrayOfArray 2
 pop this 2
 push pointer 0
 push constant 1
-call GameFiled.InitializationArrayOfArray 2
+call GameFilled.InitializationArrayOfArray 2
 pop this 1
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
 push pointer 0
-call GameFiled.draw 1
-pop temp 0
-push pointer 0
-push constant 0
-call GameFiled.setScore 2
+call GameFilled.draw 1
 pop temp 0
 push pointer 0
 return
-function GameFiled.dispose 2
+function GameFilled.dispose 2
 push argument 0
 pop pointer 0
 push constant 0
@@ -93,22 +89,22 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-function GameFiled.getWin 0
+function GameFilled.getWin 0
 push argument 0
 pop pointer 0
 push this 4
 return
-function GameFiled.getSize 0
+function GameFilled.getSize 0
 push argument 0
 pop pointer 0
 push this 3
 return
-function GameFiled.getScore 0
+function GameFilled.getScore 0
 push argument 0
 pop pointer 0
 push this 0
 return
-function GameFiled.setScore 0
+function GameFilled.setScore 0
 push argument 0
 pop pointer 0
 push this 0
@@ -127,7 +123,7 @@ call Output.printInt 1
 pop temp 0
 push constant 0
 return
-function GameFiled.draw 4
+function GameFilled.draw 4
 push argument 0
 pop pointer 0
 push constant 240
@@ -220,7 +216,7 @@ push temp 0
 pop that 0
 push pointer 0
 push constant 4
-call GameFiled.setScore 2
+call GameFilled.setScore 2
 pop temp 0
 push constant 2
 push static 0
@@ -244,11 +240,11 @@ push temp 0
 pop that 0
 push pointer 0
 push constant 2
-call GameFiled.setScore 2
+call GameFilled.setScore 2
 pop temp 0
 push constant 0
 return
-function GameFiled.InitializationArrayOfArray 4
+function GameFilled.InitializationArrayOfArray 4
 push argument 0
 pop pointer 0
 push this 3
@@ -309,7 +305,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push local 3
 return
-function GameFiled.FillArrayOfArray 3
+function GameFilled.FillArrayOfArray 3
 push argument 0
 pop pointer 0
 push constant 0
@@ -358,7 +354,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push argument 1
 return
-function GameFiled.moveRight 6
+function GameFilled.moveRight 6
 push argument 0
 pop pointer 0
 push constant 0
@@ -367,7 +363,7 @@ push pointer 0
 push this 1
 push constant 0
 not
-call GameFiled.FillArrayOfArray 3
+call GameFilled.FillArrayOfArray 3
 pop temp 0
 push this 3
 push constant 1
@@ -752,19 +748,19 @@ if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
 push pointer 0
-call GameFiled.addRandomTile 1
+call GameFilled.addRandomTile 1
 pop temp 0
 label IF_FALSE3
 push constant 0
 return
-function GameFiled.moveLeft 6
+function GameFilled.moveLeft 6
 push argument 0
 pop pointer 0
 push pointer 0
 push this 1
 push constant 0
 not
-call GameFiled.FillArrayOfArray 3
+call GameFilled.FillArrayOfArray 3
 pop temp 0
 push this 3
 push constant 1
@@ -1147,19 +1143,19 @@ if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
 push pointer 0
-call GameFiled.addRandomTile 1
+call GameFilled.addRandomTile 1
 pop temp 0
 label IF_FALSE3
 push constant 0
 return
-function GameFiled.moveUp 8
+function GameFilled.moveUp 8
 push argument 0
 pop pointer 0
 push pointer 0
 push this 1
 push constant 0
 not
-call GameFiled.FillArrayOfArray 3
+call GameFilled.FillArrayOfArray 3
 pop temp 0
 push this 3
 push constant 1
@@ -1540,12 +1536,12 @@ if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
 push pointer 0
-call GameFiled.addRandomTile 1
+call GameFilled.addRandomTile 1
 pop temp 0
 label IF_FALSE3
 push constant 0
 return
-function GameFiled.moveDown 8
+function GameFilled.moveDown 8
 push argument 0
 pop pointer 0
 label WHILE_EXP0
@@ -1970,12 +1966,12 @@ if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
 push pointer 0
-call GameFiled.addRandomTile 1
+call GameFilled.addRandomTile 1
 pop temp 0
 label IF_FALSE3
 push constant 0
 return
-function GameFiled.addRandomTile 7
+function GameFilled.addRandomTile 7
 push argument 0
 pop pointer 0
 push constant 50
@@ -2092,7 +2088,7 @@ push temp 0
 pop that 0
 push pointer 0
 push local 3
-call GameFiled.setScore 2
+call GameFilled.setScore 2
 pop temp 0
 push local 3
 push static 0
@@ -2125,7 +2121,7 @@ call Array.dispose 1
 pop temp 0
 push constant 0
 return
-function GameFiled.isGameOver 4
+function GameFilled.isGameOver 4
 push argument 0
 pop pointer 0
 push constant 0

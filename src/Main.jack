@@ -1,10 +1,10 @@
 class Main 
 {
     function void main() {
-        var GameFiled gameFiled;
+        var GameFilled gameFiled;
         var Game game;
 
-        let gameFiled = GameFiled.new(3);
+        let gameFiled = GameFilled.new(3);
         let game = Game.new(gameFiled);
         do game.run();
         return;
