@@ -1,5 +1,5 @@
 function Random.randomEven 2
-call GameFiled.getScore 0
+push argument 1
 pop local 0
 push constant 2
 push local 0
@@ -33,7 +33,7 @@ label IF_FALSE0
 push local 1
 return
 function Random.randomTwoOrFour 2
-call GameFiled.getScore 0
+push argument 1
 push argument 0
 add
 pop local 0
