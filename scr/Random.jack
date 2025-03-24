@@ -1,12 +1,12 @@
 class Random {
 
     //Генерирует четное число в диопазоне [0;max)
-    function int randomEven(int max) 
+    function int randomEven(int max, int seed) 
     {
         var int score;
         var int result;
 
-        let score = GameFiled.getScore();
+        let score = seed;
         let result = 2 * ( score - (((max / 2) + 1) * (score / ((max / 2) + 1))));
 
         if (result = max)
@@ -17,12 +17,12 @@ class Random {
     }
 
     // Генерирует число 2 или 4
-    function int randomTwoOrFour(int count)
+    function int randomTwoOrFour(int count, int seed)
     {
         var int score;
         var int result;
 
-        let score = GameFiled.getScore() + count;
+        let score = seed + count;
         let result = (score - (8 * (score / 8)));
 
         if (~(result = 4))
