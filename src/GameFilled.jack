@@ -481,60 +481,38 @@ class GameFilled
 
 		// Проверяем, есть ли пустые клетки
 		let i = 0;
-		let j = 0;
-		while (i < gridSize) {
-			let tempArr = cells[i]; // Объявляем tempArr для каждой строки
-			while (j < gridSize) {
-				if (tempArr[j] = 0) {
-					return false;  // Есть пустая клетка, игра продолжается
+        let j = 0;        
+		while (i < gridSize-1)
+        {            
+			let tempArr = cells[i];
+            let tempArr1 = cells[i+1];            
+			while (j < gridSize-1)
+            {                
+				if ((tempArr[j] = 0) | (tempArr[j] = tempArr1[j]) | (tempArr[j] = tempArr[j+1]))
+				{
+                    return false;                
 				}
-				let j = j + 1;
+                let j = j + 1;            
 			}
+            if ((tempArr[j] = tempArr1[j]) | (tempArr[j] = 0))
+			{                
+				return false;
+            }            
 			let i = i + 1;
-			let j = 0;
+            let j = 0;        
 		}
-
-		while (i < gridSize) {
-			let tempArr = cells[i]; // Объявляем tempArr для каждой строки
-			while (j < gridSize) {
-				if (tempArr[j] = 0) {
-					return false;  // Есть пустая клетка, игра продолжается
-				}
-				let j = j + 1;
-			}
-			let i = i + 1;
-			let j = 0;
-		}
-
-		// Проверяем, можно ли сделать слияние плиток по горизонтали
-		let i = 0;
-		let j = 0;
-		while (i < gridSize) {
-			let tempArr = cells[i];  // Объявляем tempArr для каждой строки
-			while (j < (gridSize - 1)) {
-				if (tempArr[j] = tempArr[j+1]) {
-					return false;  // Можно объединить плитки по горизонтали
-				}
-				let j = j + 1;
-			}
-			let i = i + 1;
-			let j = 0;
-		}
-
-		// Проверяем, можно ли сделать слияние плиток по вертикали
-		let i = 0;
-		let j = 0;
-		while (j < gridSize) {
-			while (i < (gridSize - 1)) {
-				let tempArr = cells[i];
-				let tempArr1 = cells[i+1]; // Объявляем tempArr1 для соседних строк
-				if (tempArr[j] = tempArr1[j]) {
-					return false;  // Можно объединить плитки по вертикали
-				}
-				let i = i + 1;
-			}
-			let i = 0;
+        let tempArr = cells[i];        
+		while (j < gridSize - 1)
+		{
+            if ((tempArr[j] = 0) | (tempArr[j] = tempArr[j+1]))
+			{                
+				return false;
+            }            
 			let j = j + 1;
+        }        
+		if (tempArr[j] = 0)
+		{
+            return false;        
 		}
 
 		// Если не осталось пустых клеток и плитки не могут быть объединены
