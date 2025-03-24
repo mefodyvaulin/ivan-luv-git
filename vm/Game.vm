@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 8
+push constant 9
 call Memory.alloc 1
 pop pointer 0
 push argument 0
@@ -160,8 +160,51 @@ call String.appendChar 2
 push constant 58
 call String.appendChar 2
 pop this 7
+push constant 20
+call String.new 1
+push constant 89
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 99
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 44
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 98
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+pop this 8
 push pointer 0
-call Game.SetBestScore 1
+call Game.setBestScore 1
 pop temp 0
 push pointer 0
 return
@@ -202,16 +245,9 @@ and
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-call Screen.clearScreen 0
-pop temp 0
-push this 0
-call GameFilled.dispose 1
-pop temp 0
-push constant 3
-call GameFilled.new 1
-pop this 0
 push pointer 0
-call Game.SetBestScore 1
+push constant 3
+call Game.updateGameFilled 2
 pop temp 0
 label IF_FALSE0
 push local 0
@@ -225,16 +261,9 @@ and
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
-call Screen.clearScreen 0
-pop temp 0
-push this 0
-call GameFilled.dispose 1
-pop temp 0
-push constant 4
-call GameFilled.new 1
-pop this 0
 push pointer 0
-call Game.SetBestScore 1
+push constant 4
+call Game.updateGameFilled 2
 pop temp 0
 label IF_FALSE1
 push local 0
@@ -248,16 +277,9 @@ and
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
-call Screen.clearScreen 0
-pop temp 0
-push this 0
-call GameFilled.dispose 1
-pop temp 0
-push constant 5
-call GameFilled.new 1
-pop this 0
 push pointer 0
-call Game.SetBestScore 1
+push constant 5
+call Game.updateGameFilled 2
 pop temp 0
 label IF_FALSE2
 push local 0
@@ -271,17 +293,12 @@ and
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
-call Screen.clearScreen 0
-pop temp 0
-push this 0
-call GameFilled.dispose 1
+push pointer 0
+call Game.drawEndScreen 1
 pop temp 0
 push constant 0
 not
 pop local 2
-push pointer 0
-call Game.SetBestScore 1
-pop temp 0
 label IF_FALSE3
 push local 0
 push constant 68
@@ -296,11 +313,8 @@ label IF_TRUE4
 push this 0
 call GameFilled.moveRight 1
 pop temp 0
-push this 0
-call GameFilled.getWin 1
-pop local 4
 push pointer 0
-call Game.SetBestScore 1
+call Game.setBestScore 1
 pop temp 0
 label IF_FALSE4
 push local 0
@@ -316,11 +330,8 @@ label IF_TRUE5
 push this 0
 call GameFilled.moveLeft 1
 pop temp 0
-push this 0
-call GameFilled.getWin 1
-pop local 4
 push pointer 0
-call Game.SetBestScore 1
+call Game.setBestScore 1
 pop temp 0
 label IF_FALSE5
 push local 0
@@ -336,11 +347,8 @@ label IF_TRUE6
 push this 0
 call GameFilled.moveUp 1
 pop temp 0
-push this 0
-call GameFilled.getWin 1
-pop local 4
 push pointer 0
-call Game.SetBestScore 1
+call Game.setBestScore 1
 pop temp 0
 label IF_FALSE6
 push local 0
@@ -356,13 +364,13 @@ label IF_TRUE7
 push this 0
 call GameFilled.moveDown 1
 pop temp 0
+push pointer 0
+call Game.setBestScore 1
+pop temp 0
+label IF_FALSE7
 push this 0
 call GameFilled.getWin 1
 pop local 4
-push pointer 0
-call Game.SetBestScore 1
-pop temp 0
-label IF_FALSE7
 push this 0
 call GameFilled.isGameOver 1
 push local 4
@@ -418,7 +426,28 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Game.SetBestScore 1
+function Game.drawEndScreen 0
+push argument 0
+pop pointer 0
+call Screen.clearScreen 0
+pop temp 0
+push constant 8
+push constant 20
+call Output.moveCursor 2
+pop temp 0
+push constant 200
+push constant 100
+call DrawerNum.draw2048T 2
+pop temp 0
+push this 8
+call Output.printString 1
+pop temp 0
+push this 0
+call GameFilled.dispose 1
+pop temp 0
+push constant 0
+return
+function Game.setBestScore 1
 push argument 0
 pop pointer 0
 push this 0
@@ -501,6 +530,22 @@ call Output.moveCursor 2
 pop temp 0
 push this 4
 call Output.printString 1
+pop temp 0
+push constant 0
+return
+function Game.updateGameFilled 0
+push argument 0
+pop pointer 0
+call Screen.clearScreen 0
+pop temp 0
+push this 0
+call GameFilled.dispose 1
+pop temp 0
+push argument 1
+call GameFilled.new 1
+pop this 0
+push pointer 0
+call Game.setBestScore 1
 pop temp 0
 push constant 0
 return

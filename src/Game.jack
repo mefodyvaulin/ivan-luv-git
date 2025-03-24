@@ -1,7 +1,7 @@
 class Game{
     field GameFilled gameFilled;
     field int bestScore;
-    field String gameOver, pressAnyButton, forPlayAgain, youLose, youWin, bestScoreStr;
+    field String gameOver, pressAnyButton, forPlayAgain, youLose, youWin, bestScoreStr, youCloseGameBye;
 
     constructor Game new(GameFilled gameF){
         let gameFilled = gameF;
@@ -12,7 +12,8 @@ class Game{
         let youLose = "You lose";
         let youWin = "You isWin";
         let bestScoreStr = "Best score:";
-        do SetBestScore();
+        let youCloseGameBye = "You close game, bye!";
+        do setBestScore();
         return this;
     }
 
@@ -46,69 +47,59 @@ class Game{
                 let size = gameFilled.getSize();
                 let isWin = gameFilled.getWin();
 
-				if ((key = 49) & (~(size = 3))) {
-                    do Screen.clearScreen();
-                    do gameFilled.dispose();
-                    let gameFilled = GameFilled.new(3); // press 1
-                    do SetBestScore();
+				if ((key = 49) & (~(size = 3))) // press 1
+                {
+                    do updateGameFilled(3);
 				} 
                 
-				if ((key = 50) & (~(size = 4))) { 
-                    do Screen.clearScreen();
-                    do gameFilled.dispose();
-                    let gameFilled = GameFilled.new(4); // press 2
-                    do SetBestScore();
+				if ((key = 50) & (~(size = 4))) // press 2
+                { 
+                    do updateGameFilled(4);
 				}
 
-				if ((key = 51) & (~(size = 5))) { 
- 
-                    do Screen.clearScreen();
-                    do gameFilled.dispose();
-                    let gameFilled = GameFilled.new(5); // press 3
-                    do SetBestScore();
+				if ((key = 51) & (~(size = 5))) // press 3
+                { 
+                   do updateGameFilled(5);
 				}
 
-                if ((key = 52) & (~(size = 2))) { 
-                    do Screen.clearScreen();
-                    do gameFilled.dispose();
-                    let exit = true; // press 4
-                    do SetBestScore();
+                if ((key = 52) & (~(size = 2)))  // press 4
+                { 
+                    do drawEndScreen();
+                    let exit = true;
 				}  
 
                 if ((key = 68) | (key = 132))
                 {
                     do gameFilled.moveRight(); // press D or Right
-                    let isWin = gameFilled.getWin();
-                    do SetBestScore();
+                    do setBestScore();
                 }
 
                 if ((key = 65) | (key = 130))
                 {
                     do gameFilled.moveLeft(); // press A or Left
-                    let isWin = gameFilled.getWin();
-                    do SetBestScore();   
+                    do setBestScore();   
                 }
 
                 if ((key = 87) | (key = 131))
                 {
                     do gameFilled.moveUp(); // press W or Up
-                    let isWin = gameFilled.getWin();
-                    do SetBestScore();   
+                    do setBestScore();   
                 }
 
                 if ((key = 83) | (key = 133))
                 {
                     do gameFilled.moveDown(); // press S  or Down
-                    let isWin = gameFilled.getWin();
-                    do SetBestScore();
+                    do setBestScore();
                 }
 				
                 // Проверка конца
+                let isWin = gameFilled.getWin();
                 if ((gameFilled.isGameOver()) | isWin) 
                 {
                     do drawGameOver(isWin);
                     do gameFilled.dispose();
                     do Sys.wait(2000);
+
                     let key = Keyboard.keyPressed(); 
                     while ((key = 0))
                     {
@@ -118,7 +109,6 @@ class Game{
                     let gameFilled = GameFilled.new(size);
                 }
 
-				// waits for the key to be released
 				while ((~(key = 0)) & (~(exit)))
                 {
 					let key = Keyboard.keyPressed(); 
@@ -129,7 +119,17 @@ class Game{
         return;
     }
 
-    method void SetBestScore()
+    method void drawEndScreen()
+    {
+        do Screen.clearScreen();
+        do Output.moveCursor(8,20);
+        do DrawerNum.draw2048T(200,100);
+        do Output.printString(youCloseGameBye);
+        do gameFilled.dispose();
+        return;
+    }
+
+    method void setBestScore()
     {
         var int score;
 
@@ -170,6 +170,15 @@ class Game{
         do Output.printString(pressAnyButton);
         do Output.moveCursor(13,25);
         do Output.printString(forPlayAgain);
+        return;
+    }
+
+    method void updateGameFilled(int size)
+    {
+        do Screen.clearScreen();
+        do gameFilled.dispose();
+        let gameFilled = GameFilled.new(size); // press 1
+        do setBestScore();
         return;
     }
 }

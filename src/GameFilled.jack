@@ -8,7 +8,7 @@ class GameFilled
 	field int score;
 	field Array isFusionCells;
 	field Array cells; // двумерный массив
-	field int gridSize; // счетчик, размер сетки
+	field int gridSize; // размер сетки
 	field boolean isWin;
 
 	constructor GameFilled new(int size) 
