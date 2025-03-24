@@ -31,9 +31,6 @@ class GameFiled
 		// рисуется игрове поле
 		do Screen.setColor(true);
 		do draw();
-		
-		// выводится счет
-		do setScore(0);
 
 		return this;
 	}
@@ -168,7 +165,7 @@ class GameFiled
 	{
 		var Array tempArr, boolArrh;
 		var int i, j, p;
-		var bool addNewTile;
+		var boolean addNewTile;
 		
 		let addNewTile = false;
 
@@ -233,7 +230,7 @@ class GameFiled
 	{
 		var Array tempArr, boolArrh;
 		var int i, j, p;
-		var bool addNewTile;
+		var boolean addNewTile;
 
 		do FillArrayOfArray(boolArr, true);
 
@@ -295,7 +292,7 @@ class GameFiled
 	method void moveUp(){
 		var Array tempArr, tempArr1, boolArrh, boolArrh1;
 		var int i, j, p;
-		var bool addNewTile;
+		var boolean addNewTile;
 
 		do FillArrayOfArray(boolArr, true);
 		let p = gridSize - 1;
@@ -360,7 +357,7 @@ class GameFiled
 	{
 		var Array tempArr, tempArr1, boolArrh, boolArrh1;
 		var int i, j, p;
-		var bool addNewTile;
+		var boolean addNewTile;
 
 		while (i < gridSize)
 		{
@@ -475,7 +472,7 @@ class GameFiled
 		return;
     }
 
-	method bool isGameOver() 
+	method boolean isGameOver() 
 	{
 		var int i, j;
 		var Array tempArr, tempArr1;

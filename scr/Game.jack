@@ -10,7 +10,7 @@ class Game{
         let pressAnyButton = "Press any button";
         let forPlayAgain = "for play again";
         let youLose = "You lose";
-        let youWin = "You win";
+        let youWin = "You isWin";
         let bestScoreStr = "Best score:";
         do SetBestScore();
         return this;
@@ -30,12 +30,12 @@ class Game{
     {
 		var char key; // the key currently pressed by the user
         var int size;
-        var bool exit;
+        var boolean exit;
         var int score;
-        var bool win;
+        var boolean isWin;
 
         let exit = false;
-        let win = false;
+        let isWin = false;
 		while (~exit)
         {
 			// typical handling of "keyboard events" in interactive Jack apps
@@ -44,7 +44,7 @@ class Game{
             {
 				let key = Keyboard.keyPressed(); 
                 let size = gameFiled.getSize();
-                let win = gameFiled.getWin();
+                let isWin = gameFiled.getWin();
 
 				if ((key = 49) & (~(size = 3))) {
                     do Screen.clearScreen();
@@ -78,68 +78,35 @@ class Game{
                 if ((key = 68) | (key = 132))
                 {
                     do gameFiled.moveRight(); // press D or Right
-                    let score = gameFiled.getScore();
-                    let win = gameFiled.getWin();
-                    if (score > bestScore){
-                        let bestScore = score;
-                        do SetBestScore();
-                    }
+                    let isWin = gameFiled.getWin();
+                    do SetBestScore();
                 }
 
                 if ((key = 65) | (key = 130))
                 {
                     do gameFiled.moveLeft(); // press A or Left
-                    let score = gameFiled.getScore();
-                    let win = gameFiled.getWin();
-                    if (score > bestScore){
-                        let bestScore = score;
-                        do SetBestScore();
-                    }
+                    let isWin = gameFiled.getWin();
+                    do SetBestScore();   
                 }
 
                 if ((key = 87) | (key = 131))
                 {
                     do gameFiled.moveUp(); // press W or Up
-                    let score = gameFiled.getScore();
-                    let win = gameFiled.getWin();
-                    if (score > bestScore){
-                        let bestScore = score;
-                        do SetBestScore();
-                    }
+                    let isWin = gameFiled.getWin();
+                    do SetBestScore();   
                 }
 
                 if ((key = 83) | (key = 133))
                 {
                     do gameFiled.moveDown(); // press S  or Down
-                    let score = gameFiled.getScore();
-                    let win = gameFiled.getWin();
-                    if (score > bestScore){
-                        let bestScore = score;
-                        do SetBestScore();
-                    }
+                    let isWin = gameFiled.getWin();
+                    do SetBestScore();
                 }
 				
                 // Проверка конца
-                if ((gameFiled.isGameOver()) | win) 
+                if ((gameFiled.isGameOver()) | isWin) 
                 {
-                    if (win)
-                    {
-                        do Output.moveCursor(10,28);
-                        do Output.printString(youWin);
-                    }
-
-                    else
-                    {
-                        do Output.moveCursor(10,28);
-                        do Output.printString(youLose);
-                    }
-                    do Output.moveCursor(11,27);
-                    do Output.printString(gameOver);
-                    do Output.moveCursor(12,25);
-                    do Output.printString(pressAnyButton);
-                    do Output.moveCursor(13,25);
-                    do Output.printString(forPlayAgain);
-                    
+                    do drawGameOver(isWin);
                     do gameFiled.dispose();
                     do Sys.wait(2000);
                     let key = Keyboard.keyPressed(); 
@@ -157,15 +124,52 @@ class Game{
 					let key = Keyboard.keyPressed(); 
 				}
 			} 
-            return;
+            
         }
+        return;
     }
 
     method void SetBestScore()
     {
-        do Output.moveCursor(1,48);
-        do Output.printString(bestScoreStr);
-        do Output.printInt(bestScore);
+        var int score;
+
+        let score = gameFiled.getScore();
+        if (score > bestScore)
+        {
+            let bestScore = score;
+            do Output.moveCursor(1,48);
+            do Output.printString(bestScoreStr);
+            do Output.printInt(bestScore);                      
+        }
+        else
+        {
+            do Output.moveCursor(1,48);
+            do Output.printString(bestScoreStr);
+            do Output.printInt(bestScore);    
+        }
+        
+        return;
+    }
+
+    method void drawGameOver(boolean isWin)
+    {
+        if (isWin)
+        {
+            do Output.moveCursor(10,28);
+            do Output.printString(youWin);
+        }
+
+        else
+        {
+            do Output.moveCursor(10,28);
+            do Output.printString(youLose);
+        }
+        do Output.moveCursor(11,27);
+        do Output.printString(gameOver);
+        do Output.moveCursor(12,25);
+        do Output.printString(pressAnyButton);
+        do Output.moveCursor(13,25);
+        do Output.printString(forPlayAgain);
         return;
     }
 }
