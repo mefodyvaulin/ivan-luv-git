@@ -482,11 +482,11 @@ class GameFilled
 		// Проверяем, есть ли пустые клетки
 		let i = 0;
         let j = 0;        
-		while (i < gridSize-1)
+		while (i < (gridSize-1))
         {            
 			let tempArr = cells[i];
             let tempArr1 = cells[i+1];            
-			while (j < gridSize-1)
+			while (j < (gridSize-1))
             {                
 				if ((tempArr[j] = 0) | (tempArr[j] = tempArr1[j]) | (tempArr[j] = tempArr[j+1]))
 				{
@@ -502,7 +502,7 @@ class GameFilled
             let j = 0;        
 		}
         let tempArr = cells[i];        
-		while (j < gridSize - 1)
+		while (j < (gridSize - 1))
 		{
             if ((tempArr[j] = 0) | (tempArr[j] = tempArr[j+1]))
 			{                
