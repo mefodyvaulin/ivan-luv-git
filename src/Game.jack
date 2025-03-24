@@ -3,8 +3,9 @@ class Game{
     field int bestScore;
     field String gameOver, pressAnyButton, forPlayAgain, youLose, youWin, bestScoreStr, youCloseGameBye;
 
-    constructor Game new(GameFilled gameF){
-        let gameFilled = gameF;
+    constructor Game new(GameFilled _gameFilled)
+    {
+        let gameFilled = _gameFilled;
         let bestScore = 0;
         let gameOver = "Game Over!";
         let pressAnyButton = "Press any button";
@@ -29,18 +30,14 @@ class Game{
         */
 	method void run() 
     {
-		var char key; // the key currently pressed by the user
-        var int size;
-        var boolean exit;
-        var int score;
-        var boolean isWin;
+		var char key;
+        var int size, score;
+        var boolean exit, isWin;
 
         let exit = false;
         let isWin = false;
 		while (~exit)
         {
-			// typical handling of "keyboard events" in interactive Jack apps
-			// waits for a key to be pressed
 			while (key = 0) 
             {
 				let key = Keyboard.keyPressed(); 

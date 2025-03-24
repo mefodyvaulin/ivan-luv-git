@@ -1,2 +1,2 @@
-- Отрефакторить и по возможности декомпозировать код.
-
+- Метод [moveRight](https://github.com/mefodyvaulin/ivan-luv-git/blob/343342834aafd87a367342709316dbc31f60482c/scr/GameFiled.jack#L138) и т.п. в GameFiled.jack - тройной цикл while, пятая степень вложенности кода и дубликация всего этого на 4 метода явно говорит о том, что данное место требует серьёзного рефактора.
+- Метод [isGameOver](https://github.com/mefodyvaulin/ivan-luv-git/blob/343342834aafd87a367342709316dbc31f60482c/scr/GameFiled.jack#L481) в GameFiled.jack - 4 раза повторяется похожий код на проверку конца игры. По крайней первые 2 цикла полностью идентичны.
