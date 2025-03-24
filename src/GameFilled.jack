@@ -161,274 +161,137 @@ class GameFilled
 		return array;
 	}
 
-	method void moveRight()
+
+	method void moveInDirection(int dx, int dy)
 	{
-		var Array tempArr, boolArrh;
-		var int i, j, p;
+		var Array tempArr, tempArr1, boolArr, boolArr1;
+		var int i, j, p, ni, nj;
 		var boolean addNewTile;
-		
-		let addNewTile = false;
-
-		// массив для проверки того, было ли слияние в ячейке
-		do FillArrayOfArray(isFusionCells, true);
-
-		let p = gridSize - 1;
-		while(p > 0)
-		{
-			let i = 0;
-			let j = gridSize - 1;
-
-			while (i < gridSize)
-			{
-				let tempArr = cells[i]; 
-				let boolArrh = isFusionCells[i];
-				while (j > 0)
-				{
-					if (tempArr[j] = tempArr[j-1] & (~(tempArr[j] = 0)) & boolArrh[j] & boolArrh[j-1])
-					{
-						do Screen.setColor(false);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-						do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-						let tempArr[j] = tempArr[j] + tempArr[j-1];
-						if (tempArr[j] = 2048)
-						{
-							let isWin = true;
-						}
-						let addNewTile = true; // надо добавить новую ячейку
-						let boolArrh[j] = false;// больше не надо делать слияния с этой ячейкой
-						let tempArr[j-1] = 0;
-						do Screen.setColor(true);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-					}
-
-					if (tempArr[j] = 0 & (~(tempArr[j-1] = 0)))
-					{
-						do Screen.setColor(false);
-						do DrawerNum.drawNum(tempArr[j-1], x1 + (((x2 - x1) / gridSize) * (j-1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-						let tempArr[j] = tempArr[j-1];
-						let addNewTile = true; // надо добавить новую ячейку
-						let tempArr[j-1] = 0;
-						do Screen.setColor(true);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-					}
-
-					let j = j - 1;
-				}
-				let j = gridSize - 1;
-				let i = i + 1;
-			}
-			let p = p - 1;
-		}
-		
-		if (addNewTile)
-		{
-			do addRandomTile();
-		}
-		
-		return;
-	}
-
-	method void moveLeft()
-	{
-		var Array tempArr, boolArrh;
-		var int i, j, p;
-		var boolean addNewTile;
-
-		do FillArrayOfArray(isFusionCells, true);
-
-		let p = gridSize - 1;
-		while(p > 0)
-		{
-			let i = 0;
-			let j = 0;
-			while (i < gridSize)
-			{
-				let tempArr = cells[i]; 
-				let boolArrh = isFusionCells[i];
-				while (j < (gridSize - 1))
-				{
-					if (tempArr[j] = tempArr[j+1] & (~(tempArr[j] = 0)) & boolArrh[j] & boolArrh[j+1])
-					{
-						
-						do Screen.setColor(false);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-						do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-						let tempArr[j] = tempArr[j] + tempArr[j+1];
-						if (tempArr[j] = 2048){
-							let isWin = true;
-						}
-						let tempArr[j+1] = 0;
-						let addNewTile = true; // надо добавить новую ячейку
-						let boolArrh[j] = false;// больше не надо делать слияния с этой ячейкой
-						do Screen.setColor(true);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-					}
-
-					if (tempArr[j] = 0 & (~(tempArr[j+1] = 0)))
-					{
-						do Screen.setColor(false);
-						do DrawerNum.drawNum(tempArr[j+1], x1 + (((x2 - x1) / gridSize) * (j+1)) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-						let tempArr[j] = tempArr[j+1];
-						let tempArr[j+1] = 0;
-						let addNewTile = true; // надо добавить новую ячейку
-						do Screen.setColor(true);
-						do DrawerNum.drawNum(tempArr[j],x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-					}
-
-					let j = j + 1;
-				}
-				let j = 0;
-				let i = i + 1;
-			}
-			let p = p - 1;
-		}
-		
-		if (addNewTile)
-		{
-			do addRandomTile();
-		}
-
-		return;
-	}
-
-	method void moveUp(){
-		var Array tempArr, tempArr1, boolArrh, boolArrh1;
-		var int i, j, p;
-		var boolean addNewTile;
+		var int di, dj;
 
 		do FillArrayOfArray(isFusionCells, true);
 		let p = gridSize - 1;
 
-		
-		while(p > 0)
-		{
-			let i = 0;
-			let j = 0;
-			while (j < gridSize )
-			{
-				while (i < (gridSize - 1))
-				{
-					let tempArr = cells[i];
-					let tempArr1 = cells[i+1];
-					let boolArrh = isFusionCells[i];
-					let boolArrh1 = isFusionCells[i+1];
-					if (tempArr[j] = tempArr1[j] & (~(tempArr[j] = 0)) & boolArrh[j] & boolArrh1[j])
-					{
-						do Screen.setColor(false);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-						do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5, gridSize);
-						let tempArr[j] = tempArr1[j] + tempArr[j];
-						let tempArr1[j] = 0;
-						if (tempArr[j] = 2048){
-							let isWin = true;
-						}
-						let addNewTile = true; // надо добавить новую ячейку
-						let boolArrh[j] = false; // больше не надо делать слияния с этой ячейкой
-						do Screen.setColor(true);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-					}
-
-					if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
-					{
-						do Screen.setColor(false);
-						do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i+1)) + 5, gridSize);
-						let tempArr[j] = tempArr1[j];
-						let tempArr1[j] = 0;
-						let addNewTile = true; // надо добавить новую ячейку
-						do Screen.setColor(true);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-					}
-
-					let i = i + 1;
-				}
-				let i = 0;
-				let j = j + 1;
-			}
-			let p = p - 1;
-		}
-		
-		
-		if (addNewTile){
-			do addRandomTile();
-		}
-
-		return;
-	}
-
-	method void moveDown()
-	{
-		var Array tempArr, tempArr1, boolArrh, boolArrh1;
-		var int i, j, p;
-		var boolean addNewTile;
-
-		while (i < gridSize)
-		{
-			let boolArrh = isFusionCells[i];
-			while (j < gridSize)
-			{
-				let boolArrh[j] = true;
-				let j = j + 1;
-			}
-			let j = 0;
-			let i = i + 1;
-		}
-
-		let p = gridSize - 1;
-
-		while(p > 0)
-		{
+		// Вычисляем начальные направления перемещения
+		if (dy > 0) {
+			let di = -1;
 			let i = gridSize - 1;
-			let j = 0;
-			while (j < gridSize)
-			{
-				while (i > 0)
-				{
-					let tempArr = cells[i];
-					let tempArr1 = cells[i-1];
-					let boolArrh = isFusionCells[i];
-					let boolArrh1 = isFusionCells[i-1];
+		} else {
+			let di = 1;
+			let i = 0;
+		}
 
-					if (tempArr[j] = tempArr1[j] & (~(tempArr[j] = 0)) & boolArrh[j] & boolArrh1[j])
+		if (dx > 0) {
+			let dj = -1;
+			let j = gridSize - 1;
+		} else {
+			let dj = 1;
+			let j = 0;
+		}
+
+		while (p > 0)
+		{
+			if (dy > 0) {
+				let i = gridSize - 1;
+			} else {
+				let i = 0;
+			}
+
+			if (dx > 0) {
+				let j = gridSize - 1;
+			} else {
+				let j = 0;
+			}
+
+			// теперь проходим по клеткам
+			while ((dy = 0 and j >= 0 and j < gridSize) or (dx = 0 and i >= 0 and i < gridSize))
+			{
+				let tempArr = cells[i];
+				let boolArr = isFusionCells[i];
+				let ni = i - dy;
+				let nj = j - dx;
+
+				if (ni >= 0 & ni < gridSize & nj >= 0 & nj < gridSize)
+				{
+					let tempArr1 = cells[ni];
+					let boolArr1 = isFusionCells[ni];
+
+					if (tempArr[j] = tempArr1[nj] & (~(tempArr[j] = 0)) & boolArr[j] & boolArr1[nj])
 					{
 						do Screen.setColor(false);
 						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
-						do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5, gridSize);
-						let tempArr[j] = tempArr1[j] + tempArr[j];
-						if (tempArr[j] = 2048){
+						do DrawerNum.drawNum(tempArr1[nj], x1 + (((x2 - x1) / gridSize) * nj) + 5, y1 + (((x2 - x1) / gridSize) * ni) + 5, gridSize);
+						let tempArr[j] = tempArr[j] + tempArr1[nj];
+						if (tempArr[j] = 2048) {
 							let isWin = true;
 						}
-						let tempArr1[j] = 0;
-						let addNewTile = true; // надо добавить новую ячейку
-						let boolArrh[j] = false;// больше не надо делать слияния с этой ячейкой
+						let tempArr1[nj] = 0;
+						let boolArr[j] = false;
+						let addNewTile = true;
 						do Screen.setColor(true);
 						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
 					}
-
-					if (tempArr[j] = 0 & (~(tempArr1[j] = 0)))
-					{
-						do Screen.setColor(false);
-						do DrawerNum.drawNum(tempArr1[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * (i-1)) + 5, gridSize);
-						let tempArr[j] = tempArr1[j];
-						let tempArr1[j] = 0;
-						let addNewTile = true; // надо добавить новую ячейку
-						do Screen.setColor(true);
-						do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+					else {
+						if (tempArr[j] = 0 & (~(tempArr1[nj] = 0)))
+						{
+							do Screen.setColor(false);
+							do DrawerNum.drawNum(tempArr1[nj], x1 + (((x2 - x1) / gridSize) * nj) + 5, y1 + (((x2 - x1) / gridSize) * ni) + 5, gridSize);
+							let tempArr[j] = tempArr1[nj];
+							let tempArr1[nj] = 0;
+							let addNewTile = true;
+							do Screen.setColor(true);
+							do DrawerNum.drawNum(tempArr[j], x1 + (((x2 - x1) / gridSize) * j) + 5, y1 + (((x2 - x1) / gridSize) * i) + 5, gridSize);
+						}
 					}
-					let i = i - 1;
 				}
-				let i = gridSize - 1;
-				let j = j + 1;
+
+				if (dy > 0) {
+					let i = i - 1;
+				} 
+				else {
+					if (dy < 0) {
+						let i = i + 1;
+					}
+				}
+
+				if (dx > 0) {
+					let j = j - 1;
+				} 
+				else {
+					if (dx < 0) {
+						let j = j + 1;
+					}
+				}
 			}
+
 			let p = p - 1;
 		}
 
-		if (addNewTile)
-		{
+		if (addNewTile) {
 			do addRandomTile();
 		}
 
 		return;
 	}
+
+
+    method void moveRight() { 
+		do moveInDirection(1, 0);
+		return;
+		}
+    method void moveLeft() { 
+		do moveInDirection(-1, 0);
+		return;
+		}
+    method void moveUp() { 
+		do moveInDirection(0, -1);
+		return;
+		}
+    method void moveDown() { 
+		do moveInDirection(0, 1);
+		return;
+		}
+
 
 	method void addRandomTile() 
 	{
