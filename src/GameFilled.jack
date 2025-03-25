@@ -176,7 +176,8 @@ class GameFilled
 		if (dy > 0) {
 			let di = -1;
 			let i = gridSize - 1;
-		} else {
+		} 
+		else {
 			let di = 1;
 			let i = 0;
 		}
@@ -184,7 +185,8 @@ class GameFilled
 		if (dx > 0) {
 			let dj = -1;
 			let j = gridSize - 1;
-		} else {
+		} 
+		else {
 			let dj = 1;
 			let j = 0;
 		}
