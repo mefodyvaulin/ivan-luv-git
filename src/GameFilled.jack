@@ -115,7 +115,7 @@ class GameFilled
 		return;
 	}
 	
-	method Array InitializationArrayOfArray(int defult)
+	method Array InitializationArrayOfArray(int default)
 	{
 		var int i, j;
 		var Array tempArr, array;
@@ -129,7 +129,7 @@ class GameFilled
 			let tempArr = array[i];
 			while (j < gridSize)
 			{
-				let tempArr[j] = defult;
+				let tempArr[j] = default;
 				let j = j + 1;
 			}
 			let j = 0;
@@ -139,7 +139,7 @@ class GameFilled
 		return array;
 	}
 
-	method Array FillArrayOfArray(Array array, boolean defult)
+	method Array FillArrayOfArray(Array array, boolean default)
 	{
 		var int i, j;
 		var Array tempArr;
@@ -151,7 +151,7 @@ class GameFilled
 			let tempArr = array[i];
 			while (j < gridSize)
 			{
-				let tempArr[j] = defult;
+				let tempArr[j] = default;
 				let j = j + 1;
 			}
 			let j = 0;
